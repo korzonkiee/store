@@ -10,3 +10,13 @@ services:
     environment:
       ASPNETCORE_URLS: "http://*:5000"
       ASPNETCORE_ENVIRONMENT: "Development"
+    links:
+      - store-database
+
+  store-database:
+    container_name: "store-database-container"
+    image: store-database-image
+    build: ./database
+    environment:
+      SA_PASSWORD: "MyVeryStronkPassword1!"
+      ACCEPT_EULA: "Y"

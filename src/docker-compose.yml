@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  store-api:
+    container_name: "store-api-container"
+    image: store-api-image
+    build: ./api
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_URLS: "http://*:5000"
+      ASPNETCORE_ENVIRONMENT: "Development"

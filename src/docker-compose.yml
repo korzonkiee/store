@@ -4,7 +4,7 @@ services:
   store-api:
     container_name: "store-api-container"
     image: store-api-image
-    build: ./api
+    build: ./apps/api
     ports:
       - "5000:5000"
     environment:

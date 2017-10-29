@@ -4,7 +4,9 @@ services:
   store-api:
     container_name: "store-api-container"
     image: store-api-image
-    build: ./apps/api
+    build:
+      context: ./apps
+      dockerfile: ./api/Dockerfile
     ports:
       - "5000:5000"
     environment:
@@ -16,6 +18,8 @@ services:
   store-database:
     container_name: "store-database-container"
     image: store-database-image
+    ports:
+      - "1433:1433"
     build: ./database
     environment:
       SA_PASSWORD: "MyVeryStronkPassword1!"

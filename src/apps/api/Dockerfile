@@ -2,7 +2,7 @@ FROM microsoft/dotnet:latest
 
 RUN mkdir /app
 COPY . /app
-WORKDIR /app
+WORKDIR /app/api
 
 RUN dotnet restore
 RUN dotnet build

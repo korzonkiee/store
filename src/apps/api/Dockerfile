@@ -9,6 +9,8 @@ RUN dotnet build
 
 EXPOSE 5000/tcp
 
-RUN chmod +x ./entrypoint.sh
-CMD /bin/bash ./entrypoint.sh
+# RUN chmod +x ./entrypoint.sh
+# CMD /bin/bash ./entrypoint.sh
+
+ENTRYPOINT ["dotnet", "run"]
 

@@ -6,7 +6,6 @@ namespace migrations
     {
         static void Main(string[] args)
         {
-            
         }
     }
 }

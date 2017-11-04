@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace store.Migrations
+namespace migrations.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20171028114025_initial")]
+    [Migration("20171101111558_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

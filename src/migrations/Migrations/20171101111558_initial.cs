@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace store.Migrations
+namespace migrations.Migrations
 {
     public partial class initial : Migration
     {

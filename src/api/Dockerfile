@@ -14,5 +14,7 @@ WORKDIR /app/migrations
 RUN dotnet restore
 RUN dotnet build
 
+WORKDIR /app/api
+
 RUN chmod +x ./entrypoint.sh
 CMD /bin/bash ./entrypoint.sh

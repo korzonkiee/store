@@ -1,8 +1,8 @@
 using System;
 
-namespace core.models
+namespace core.dtos
 {
-    public class Product
+    public class ProductDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

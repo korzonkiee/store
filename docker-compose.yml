@@ -5,7 +5,7 @@ services:
     container_name: "store-api-container"
     image: store-api-image
     build:
-      context: ./apps
+      context: ./src
       dockerfile: ./api/Dockerfile
     ports:
       - "5000:5000"
@@ -14,7 +14,7 @@ services:
       ASPNETCORE_ENVIRONMENT: "Development"
     links:
       - store-database
-
+      
   store-database:
     container_name: "store-database-container"
     image: store-database-image

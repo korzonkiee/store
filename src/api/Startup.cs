@@ -25,11 +25,6 @@ namespace store
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=localhost;Database=master;User=sa;Password=MyVeryStronkPassword1!;";
-            services.AddDbContext<CoreDbContext>(opts =>
-                opts.UseSqlServer(connection, cfg =>
-                    cfg.MigrationsAssembly("store")));
-
             services.AddMvc();
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="Store" Height="640" Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -13,10 +13,11 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
         <materialDesign:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" />
+            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="{Binding Title}" />
         </materialDesign:Card>
     </Grid>
 </Window>

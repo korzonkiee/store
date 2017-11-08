@@ -46,8 +46,11 @@ namespace api.Controllers
             var product = Product.Create(
                 @params.Name,
                 @params.Description,
-                @params.ImageUrl
+                @params.Price,
+                @params.ImageUrl,
+                @params.DeliveryTime
             );
+            
             productsRepository.Add(product);
 
             return new StatusCodeResult((int) HttpStatusCode.Created);

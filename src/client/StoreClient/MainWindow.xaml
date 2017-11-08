@@ -16,8 +16,21 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        <materialDesign:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="{Binding Title}" />
-        </materialDesign:Card>
+        <ScrollViewer>
+            <ListView ItemsSource="{Binding Products}">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <materialDesign:Card Padding="32" Margin="8">
+                            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="{Binding Name}" />
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Window>

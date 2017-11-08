@@ -26,8 +26,18 @@ namespace migrations.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<TimeSpan>("DeliveryTime");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ImageUrl");
+
                     b.Property<string>("Name")
                         .HasMaxLength(200);
+
+                    b.Property<decimal>("Price");
 
                     b.HasKey("Id");
 

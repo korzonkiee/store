@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using StoreClient.Services;
 
 namespace StoreClient.ViewModel
 {
@@ -42,6 +43,7 @@ namespace StoreClient.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register<IProductsService, ProductsService>();
             SimpleIoc.Default.Register<MainViewModel>();
         }
 

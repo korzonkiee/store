@@ -1,11 +1,21 @@
 using GalaSoft.MvvmLight;
+using StoreClient.Services;
+using System.Threading.Tasks;
 
 namespace StoreClient.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public string Title { get; set; } = "Title";
-        public MainViewModel()
-        { }
+        private readonly IProductsService productsService;
+
+        public MainViewModel(IProductsService productsService)
+        {
+            this.productsService = productsService;
+
+            Task.Run(async () =>
+            {
+                var products = await productsService.GetProducts();
+            });
+        }
     }
 }

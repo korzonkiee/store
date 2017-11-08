@@ -43,7 +43,11 @@ namespace api.Controllers
                 return BadRequest();
             }
 
-            var product = Product.Create(@params.Name);
+            var product = Product.Create(
+                @params.Name,
+                @params.Description,
+                @params.ImageUrl
+            );
             productsRepository.Add(product);
 
             return new StatusCodeResult((int) HttpStatusCode.Created);

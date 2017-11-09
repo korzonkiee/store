@@ -12,5 +12,10 @@ namespace StoreClient.Services.Refit
     {
         [Get("/api/products")]
         Task<List<Product>> GetProducts();
+
+        [Get("/api/products/1")]
+        Task<List<Product>> GetProductById();
     }
+
+
 }

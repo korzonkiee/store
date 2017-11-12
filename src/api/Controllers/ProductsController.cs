@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using api.ControllerParams;
+using api.Services;
 using core.dtos;
 using core.models;
 using core.respositories;
@@ -12,47 +13,47 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        private readonly IProductsRepository productsRepository;
+        private readonly IProductsService productsService;
 
-        public ProductsController(IProductsRepository productsRepository)
+        public ProductsController(IProductsService productsService)
         {
-            this.productsRepository = productsRepository;
+            this.productsService = productsService;
         }
 
         [HttpGet]
         public IActionResult GetProducts()
         {
-            return Ok(productsRepository.GetAll());
+            return Ok(productsService.GetAllProducts());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetProductById(Guid id)
-        {
-            var product = productsRepository.FindById(id);
-            if (product == null)
-                return NotFound();
-            return Ok(product);
-        }
+        // [HttpGet("{id}")]
+        // public IActionResult GetProductById(Guid id)
+        // {
+        //     var product = productsService.FindById(id);
+        //     if (product == null)
+        //         return NotFound();
+        //     return Ok(product);
+        // }
 
-        [HttpPost]
-        public IActionResult Create([FromBody] ProductParams @params)
-        {
-            if (@params == null)
-            {
-                return BadRequest();
-            }
+        // [HttpPost]
+        // public IActionResult Create([FromBody] ProductParams @params)
+        // {
+        //     if (@params == null)
+        //     {
+        //         return BadRequest();
+        //     }
 
-            var product = Product.Create(
-                @params.Name,
-                @params.Description,
-                @params.Price,
-                @params.ImageUrl,
-                @params.DeliveryTime
-            );
+        //     var product = Product.Create(
+        //         @params.Name,
+        //         @params.Description,
+        //         @params.Price,
+        //         @params.ImageUrl,
+        //         @params.DeliveryTime
+        //     );
             
-            productsRepository.Add(product);
+        //     productsRepository.Add(product);
 
-            return new StatusCodeResult((int) HttpStatusCode.Created);
-        }
+        //     return new StatusCodeResult((int) HttpStatusCode.Created);
+        // }
     }
 }

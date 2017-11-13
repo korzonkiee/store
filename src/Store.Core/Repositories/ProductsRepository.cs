@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using core.models;
+using Store.Core.Models;
 
-namespace core.respositories
+namespace Store.Core.Respositories
 {
     public interface IProductsRepository
     {

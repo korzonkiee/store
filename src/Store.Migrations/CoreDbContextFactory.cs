@@ -1,9 +1,8 @@
 using System;
-using core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace migrations
+namespace Store.Migrations
 {
     public class CoreDbContextFactory : IDesignTimeDbContextFactory<CoreDbContext>
     {

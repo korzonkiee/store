@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using api.Controllers;
-using api.Services;
-using core.dtos;
 using NSubstitute;
 using Xunit;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Collections;
+using Store.Api.Services;
+using Store.Core.DTOs;
+using Store.Api.Controllers;
 
-namespace api.tests.Controllers
+namespace Store.Api.Tests.Controllers
 {
     public class ProductsControllerTests
     {

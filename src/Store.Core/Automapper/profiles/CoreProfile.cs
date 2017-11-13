@@ -1,8 +1,8 @@
 using AutoMapper;
-using core.dtos;
-using core.models;
+using Store.Core.DTOs;
+using Store.Core.Models;
 
-namespace core.automapper.profiles
+namespace Store.Core.Automapper.Profiles
 {
     public class CoreProfile : Profile
     {

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using core.dtos;
-using core.respositories;
+using Store.Core.DTOs;
+using Store.Core.Respositories;
 
-namespace api.Services
+namespace Store.Api.Services
 {
     public interface IProductsService
     {

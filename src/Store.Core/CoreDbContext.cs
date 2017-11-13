@@ -1,8 +1,8 @@
 using System;
-using core.models;
 using Microsoft.EntityFrameworkCore;
+using Store.Core.Models;
 
-namespace core
+namespace Store.Core
 {
     public class CoreDbContext : DbContext
     {

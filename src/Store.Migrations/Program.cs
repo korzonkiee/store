@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace migrations
+namespace Store.Migrations
 {
     class Program
     {

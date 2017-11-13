@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using api.ControllerParams;
-using api.Services;
-using core.dtos;
-using core.models;
-using core.respositories;
 using Microsoft.AspNetCore.Mvc;
+using Store.Api.Services;
 
-namespace api.Controllers
+namespace Store.Api.Controllers
 {
     [Route("api/[controller]")]
     public class ProductsController : Controller

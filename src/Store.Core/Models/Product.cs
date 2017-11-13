@@ -1,6 +1,6 @@
 using System;
 
-namespace core.models
+namespace Store.Core.Models
 {
     public class Product
     {

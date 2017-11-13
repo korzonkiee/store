@@ -1,6 +1,6 @@
 using System;
 
-namespace api.ControllerParams
+namespace Store.Api.ControllerParams
 {
     public class ProductParams
     {

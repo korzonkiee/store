@@ -4,26 +4,26 @@ namespace core.models
 {
     public class Product
     {
-        public Guid Id { get; set; }
-        public DateTime DateCreated { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public string ImageUrl { get; set; }
-        public TimeSpan DeliveryTime { get; set; }
+        public Guid Id { get; private set; }
+        public Guid CategoryId { get; private set; }
+        public DateTime DateCreated { get; private set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public decimal Price { get; private set; }
+        public string ImageUrl { get; private set; }
 
-        public static Product Create(string name, string description,
-            decimal price, string imageUrl, TimeSpan deliveryTime)
+        public static Product Create(Guid categoryId, string name, string description,
+            decimal price, string imageUrl)
         {
             var product = new Product()
             {
                 Id = Guid.NewGuid(),
+                CategoryId = categoryId,
                 DateCreated = DateTime.Now,
                 Name = name,
                 Description = description,
                 Price = price,
-                ImageUrl = imageUrl,
-                DeliveryTime = deliveryTime
+                ImageUrl = imageUrl
             };
 
             return product;

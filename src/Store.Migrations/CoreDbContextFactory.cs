@@ -9,10 +9,10 @@ namespace migrations
     {
         public CoreDbContext CreateDbContext(string[] args)
         {
-            var connectionString = MigrationsConfig.LoadConnectionString("api");
+            var connectionString = MigrationsConfig.LoadConnectionString("Store.Api");
             var opts = new DbContextOptionsBuilder<CoreDbContext>()
                 .UseSqlServer(connectionString, cfg => {
-                    cfg.MigrationsAssembly("migrations");
+                    cfg.MigrationsAssembly("Store.Migrations");
                 }).Options;
 
             return new CoreDbContext(opts);

@@ -6,7 +6,7 @@ services:
     image: store-api-image
     build:
       context: ./src
-      dockerfile: ./api/Dockerfile
+      dockerfile: ./Store.Api/Dockerfile
     ports:
       - "5000:5000"
     environment:

@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/api/store.csproj" />
+    <ProjectReference Include="../../src/Store.Api/Store.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>

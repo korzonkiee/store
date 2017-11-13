@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using core.dtos;
 using core.respositories;
 
@@ -12,20 +13,18 @@ namespace api.Services
     public class ProductsService : IProductsService
     {
         private readonly IProductsRepository productsRepository;
-        public ProductsService(IProductsRepository productsRepository)
+        private readonly IMapper mapper;
+
+        public ProductsService(IProductsRepository productsRepository, IMapper mapper)
         {
             this.productsRepository = productsRepository;
+            this.mapper = mapper;
         }
 
         public List<ProductDTO> GetAllProducts()
         {
-            return productsRepository
-                .GetAll()
-                .Select(p => new ProductDTO()
-                {
-                    Name = p.Name
-                })
-                .ToList();
+            var products = productsRepository.GetAll();
+            return mapper.Map<List<ProductDTO>>(products);
         }
     }
 }

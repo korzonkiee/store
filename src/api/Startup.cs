@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using core;
 using core.respositories;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +42,7 @@ namespace store
             });
 
             services.AddScoped<IProductsRepository, ProductsRepository>();
-
+            services.AddAutoMapper();
             services.AddMvc();
         }
 

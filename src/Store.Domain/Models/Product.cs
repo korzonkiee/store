@@ -1,6 +1,6 @@
 using System;
 
-namespace Store.Core.Models
+namespace Store.Domain.Models
 {
     public class Product
     {

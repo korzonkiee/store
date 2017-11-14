@@ -1,18 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Store.Core.Models;
+using Store.Domain.Models;
+using Store.Domain.Repository;
 
-namespace Store.Core.Respositories
+namespace Store.DataAccess.Repository
 {
-    public interface IProductsRepository
-    {
-         IEnumerable<Product> GetAll();
-         Product FindById(Guid id);
-
-         void Add(Product product);
-    }
-
     public class ProductsRepository : IProductsRepository
     {
         private readonly CoreDbContext context;
@@ -21,12 +13,12 @@ namespace Store.Core.Respositories
             this.context = context;
         }
 
-        public IEnumerable<Product> GetAll()
+        public IQueryable<Product> GetAll()
         {
-            return context.Products.ToList();
+            return context.Products;
         }
         
-        public Product FindById(Guid id)
+        public Product GetById(Guid id)
         {
             return context.Products.FirstOrDefault(p => p.Id == id);
         }

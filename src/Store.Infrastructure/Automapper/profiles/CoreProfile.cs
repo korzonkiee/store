@@ -1,8 +1,8 @@
 using AutoMapper;
-using Store.Core.DTOs;
-using Store.Core.Models;
+using Store.Domain.Models;
+using Store.Infrastructure.DTOs;
 
-namespace Store.Core.Automapper.Profiles
+namespace Store.Infrastructure.Automapper.Profiles
 {
     public class CoreProfile : Profile
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Store.Api.ControllerParams;
 using Store.Api.Services;
 
 namespace Store.Api.Controllers
@@ -22,34 +23,19 @@ namespace Store.Api.Controllers
             return Ok(productsService.GetAllProducts());
         }
 
-        // [HttpGet("{id}")]
-        // public IActionResult GetProductById(Guid id)
-        // {
-        //     var product = productsService.FindById(id);
-        //     if (product == null)
-        //         return NotFound();
-        //     return Ok(product);
-        // }
+        [HttpGet("{id}")]
+        public IActionResult GetProductById(Guid id)
+        {
+            var product = productsService.GetProductById(id);
+            if (product == null)
+                return NotFound();
+            return Ok(product);
+        }
 
-        // [HttpPost]
-        // public IActionResult Create([FromBody] ProductParams @params)
-        // {
-        //     if (@params == null)
-        //     {
-        //         return BadRequest();
-        //     }
-
-        //     var product = Product.Create(
-        //         @params.Name,
-        //         @params.Description,
-        //         @params.Price,
-        //         @params.ImageUrl,
-        //         @params.DeliveryTime
-        //     );
-            
-        //     productsRepository.Add(product);
-
-        //     return new StatusCodeResult((int) HttpStatusCode.Created);
-        // }
+        [HttpPost]
+        public IActionResult Create([FromBody] ProductParams @params)
+        {
+            return new StatusCodeResult((int) HttpStatusCode.Created);
+        }
     }
 }

@@ -1,15 +1,21 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Store.Core.DTOs;
-using Store.Core.Respositories;
+using AutoMapper.QueryableExtensions;
+using Store.Api.ControllerParams;
+using Store.Domain.Repository;
+using Store.Infrastructure.DTOs;
 
 namespace Store.Api.Services
 {
     public interface IProductsService
     {
-        List<ProductDTO> GetAllProducts();
+        IEnumerable<ProductDTO> GetAllProducts();
+        ProductDTO GetProductById(Guid id);
+        void AddProduct(ProductParams @params);
     }
+
     public class ProductsService : IProductsService
     {
         private readonly IProductsRepository productsRepository;
@@ -21,10 +27,22 @@ namespace Store.Api.Services
             this.mapper = mapper;
         }
 
-        public List<ProductDTO> GetAllProducts()
+        public IEnumerable<ProductDTO> GetAllProducts()
         {
             var products = productsRepository.GetAll();
-            return mapper.Map<List<ProductDTO>>(products);
+            return products.ProjectTo<ProductDTO>();
+        }
+
+        public ProductDTO GetProductById(Guid id)
+        {
+            var product = productsRepository.GetById(id);
+            if (product != null)
+                return mapper.Map<ProductDTO>(product);
+            return null;
+        }
+
+        public void AddProduct(ProductParams @params)
+        {
         }
     }
 }

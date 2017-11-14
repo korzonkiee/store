@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
@@ -12,8 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Store.Core;
-using Store.Core.Respositories;
+using Store.DataAccess;
+using Store.DataAccess.Repository;
+using Store.Domain.Repository;
 
 namespace Store.Api
 {
@@ -43,6 +45,7 @@ namespace Store.Api
 
             services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddAutoMapper();
+            services.AddMediatR(typeof(Startup));
             services.AddMvc();
         }
 

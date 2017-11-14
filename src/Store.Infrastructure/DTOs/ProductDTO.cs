@@ -1,6 +1,6 @@
 using System;
 
-namespace Store.Core.DTOs
+namespace Store.Infrastructure.DTOs
 {
     public class ProductDTO
     {

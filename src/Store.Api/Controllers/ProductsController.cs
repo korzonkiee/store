@@ -35,6 +35,7 @@ namespace Store.Api.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] ProductParams @params)
         {
+            productsService.AddProduct(@params);
             return new StatusCodeResult((int) HttpStatusCode.Created);
         }
     }

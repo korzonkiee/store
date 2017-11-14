@@ -13,9 +13,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Store.Api.Services;
 using Store.DataAccess;
 using Store.DataAccess.Repository;
+using Store.Domain.CommandHandlers;
+using Store.Domain.Commands;
 using Store.Domain.Repository;
+using Store.Infrastructure.Bus;
 
 namespace Store.Api
 {
@@ -43,9 +47,20 @@ namespace Store.Api
                 });
             });
 
+            // Repositories
             services.AddScoped<IProductsRepository, ProductsRepository>();
+
+            // CommandHandlers
+            services.AddScoped<INotificationHandler<AddProductCommand>, AddProductCommandHandler>();
+            services.AddScoped<IBus, InMemoryBus>();
+
+            // Services
+            services.AddTransient<IProductsService, ProductsService>();
+            
+            // Plugins
             services.AddAutoMapper();
             services.AddMediatR(typeof(Startup));
+            
             services.AddMvc();
         }
 

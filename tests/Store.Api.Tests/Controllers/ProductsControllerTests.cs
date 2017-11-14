@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Collections;
 using Store.Api.Services;
-using Store.Core.DTOs;
 using Store.Api.Controllers;
+using Store.Infrastructure.DTOs;
 
 namespace Store.Api.Tests.Controllers
 {

@@ -35,10 +35,8 @@ namespace Store.Api.Services
 
         public IEnumerable<ProductDTO> GetAllProducts()
         {
-            //var products = productsRepository.GetAll();
-            var products = new List<Product>();
-            //return products.ProjectTo<ProductDTO>();
-            return mapper.Map<List<ProductDTO>>(products);
+            var products = productsRepository.GetAll();
+            return products.ProjectTo<ProductDTO>();
         }
 
         public ProductDTO GetProductById(Guid id)

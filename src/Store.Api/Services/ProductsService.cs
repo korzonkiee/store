@@ -49,7 +49,13 @@ namespace Store.Api.Services
 
         public void AddProduct(ProductParams @params)
         {
-            var addProductCommand = new AddProductCommand(@params.Name);
+            var addProductCommand = new AddProductCommand(
+                @params.Name,
+                @params.Description,
+                @params.Price,
+                @params.ImageUrl,
+                @params.DeliveryTime);
+                
             bus.SendCommand(addProductCommand);
         }
     }

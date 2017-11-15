@@ -15,14 +15,14 @@ namespace Store.Domain.CommandHandlers
             this.productsRepository = productsRepository;
         }
 
-        public void Handle(AddProductCommand notification)
+        public void Handle(AddProductCommand command)
         {
             var product = Product.Create(
                 Guid.Empty,
-                notification.Name,
-                string.Empty,
-                0,
-                string.Empty
+                command.Name,
+                command.Description,
+                command.Price,
+                command.ImageUrl
             );
 
             productsRepository.Add(product);

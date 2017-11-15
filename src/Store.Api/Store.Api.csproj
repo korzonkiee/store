@@ -6,6 +6,7 @@
     <ProjectReference Include="../Store.Infrastructure/Store.Infrastructure.csproj" />
     <ProjectReference Include="../Store.DataAccess/Store.DataAccess.csproj" />
     <ProjectReference Include="../Store.Domain/Store.Domain.csproj" />
+    <ProjectReference Include="../Store.Migrations/Store.Migrations.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.0" />

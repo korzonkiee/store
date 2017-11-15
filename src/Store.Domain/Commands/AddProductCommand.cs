@@ -1,10 +1,11 @@
 using System;
+using Store.Domain.Validations;
 
 namespace Store.Domain.Commands
 {
     public class AddProductCommand : Command
     {
-        public string Name { get; set; }
+        public string ProductName { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
@@ -13,7 +14,7 @@ namespace Store.Domain.Commands
         public AddProductCommand(string name, string desc, decimal price,
             string imageUrl, TimeSpan deliveryTime)
         {
-            Name = name;
+            ProductName = name;
             Description = desc;
             Price = price;
             ImageUrl = imageUrl;
@@ -22,7 +23,8 @@ namespace Store.Domain.Commands
 
         public override bool IsValid()
         {
-            return true;
+            ValidationResult = new AddProductCommandValidation().Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 }

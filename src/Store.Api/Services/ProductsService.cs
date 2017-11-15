@@ -4,10 +4,10 @@ using System.Linq;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Store.Api.ControllerParams;
+using Store.Domain.Bus;
 using Store.Domain.Commands;
 using Store.Domain.Models;
 using Store.Domain.Repository;
-using Store.Infrastructure.Bus;
 using Store.Infrastructure.DTOs;
 
 namespace Store.Api.Services

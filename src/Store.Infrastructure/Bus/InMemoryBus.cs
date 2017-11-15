@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using MediatR;
+using Store.Domain.Bus;
 using Store.Domain.Commands;
 using Store.Domain.Events;
 using Store.Domain.Messages;

@@ -20,6 +20,7 @@ using Store.Domain.CommandHandlers;
 using Store.Domain.Commands;
 using Store.Domain.Repository;
 using Store.Infrastructure.Bus;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Store.Api
 {
@@ -39,12 +40,17 @@ namespace Store.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CoreDbContext>(opts => 
+            services.AddDbContext<CoreDbContext>(opts =>
             {
                 opts.UseSqlServer(Configuration.GetConnectionString("Database"), cfg =>
                 {
                     cfg.MigrationsAssembly("migrations");
                 });
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Store API", Version = "v1" });
             });
 
             // Repositories
@@ -56,11 +62,11 @@ namespace Store.Api
 
             // Services
             services.AddTransient<IProductsService, ProductsService>();
-            
+
             // Plugins
             services.AddAutoMapper();
             services.AddMediatR(typeof(Startup));
-            
+
             services.AddMvc();
         }
 
@@ -71,6 +77,15 @@ namespace Store.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Store API V1");
+            });
 
             app.UseMvc();
         }

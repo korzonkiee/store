@@ -17,5 +17,15 @@ namespace Store.Domain.EventHandlers
         {
             events.Add(@event);
         }
+
+        public bool HasEvents()
+        {
+            return events.Count > 0;
+        }
+
+        public List<DomainEvent> GetEvents()
+        {
+            return events;
+        }
     }
 }

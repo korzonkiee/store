@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Store.Domain.Commands;
 using Store.Domain.Events;
 
-namespace Store.Infrastructure.Bus
+namespace Store.Domain.Bus
 {
     public interface IBus
     {

@@ -16,8 +16,11 @@ using Microsoft.Extensions.Options;
 using Store.Api.Services;
 using Store.DataAccess;
 using Store.DataAccess.Repository;
+using Store.Domain.Bus;
 using Store.Domain.CommandHandlers;
 using Store.Domain.Commands;
+using Store.Domain.EventHandlers;
+using Store.Domain.Events;
 using Store.Domain.Repository;
 using Store.Infrastructure.Bus;
 using Swashbuckle.AspNetCore.Swagger;
@@ -42,9 +45,10 @@ namespace Store.Api
         {
             services.AddDbContext<CoreDbContext>(opts =>
             {
+                var connectionString = Configuration.GetConnectionString("Database");
                 opts.UseSqlServer(Configuration.GetConnectionString("Database"), cfg =>
                 {
-                    cfg.MigrationsAssembly("migrations");
+                    cfg.MigrationsAssembly("Store.Migrations");
                 });
             });
 
@@ -55,6 +59,9 @@ namespace Store.Api
 
             // Repositories
             services.AddScoped<IProductsRepository, ProductsRepository>();
+
+            // EventHandlers
+            services.AddScoped<INotificationHandler<DomainEvent>, DomainEventHandler>();
 
             // CommandHandlers
             services.AddScoped<INotificationHandler<AddProductCommand>, AddProductCommandHandler>();

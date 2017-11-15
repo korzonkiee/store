@@ -35,6 +35,12 @@ namespace Store.Api.Controllers
             return Ok(product);
         }
 
+        // [HttpGet("search/{keyword}")]
+        // public IActionResult SearchForProductsByName(string keyword)
+        // {
+
+        // }
+
         [HttpPost]
         public IActionResult Create([FromBody] ProductParams @params)
         {

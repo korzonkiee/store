@@ -16,21 +16,20 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        <ScrollViewer Margin="10">
-            <StackPanel Orientation="Vertical">
-            <ComboBox  IsEditable="True" IsReadOnly="True" Text="Sort By:" Margin="0,0,10,0" VerticalAlignment="Top" Height="30" SelectionChanged="SortList">
+        <StackPanel Orientation="Vertical">
+            <ComboBox Text="Sort by" Margin="0,0,10,0" VerticalAlignment="Top" Height="30" SelectionChanged="SortList">
                 <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
                 <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
                 <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
             </ComboBox>
-                <DockPanel>
-                    <Label Content="Search  by name"/>
-                    <Label Content="Search by price"/>
-                    <ComboBox IsEditable="True" IsReadOnly="True" Text="Search by category">
-                        <ComboBoxItem>Electronic</ComboBoxItem>
-                    </ComboBox>
-                    <Button Content="Add new item" MouseDoubleClick="AddProduct" HorizontalAlignment="Right"></Button>
-                </DockPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Search  by name"/>
+                <Label Content="Search by price"/>
+                <ComboBox>
+                    <ComboBoxItem>Electronic</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <ScrollViewer Margin="10">
                 <ListView ItemsSource="{Binding Products}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -54,8 +53,8 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-            
+            </ScrollViewer>
         </StackPanel>
-        </ScrollViewer>
+
     </Grid>
 </Window>

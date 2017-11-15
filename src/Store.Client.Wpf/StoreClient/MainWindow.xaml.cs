@@ -26,17 +26,12 @@ namespace StoreClient
         public MainWindow()
         {
             InitializeComponent();
+            var vm = DataContext as MainViewModel;
         }
 
         private void Card_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var id = ((Card)sender).Tag;
-
-            //ProductInfo pi = new ProductInfo();
-            //pi.Id = id.ToString(); 
-            //pi.Show();
-            //pi.ShowInTaskbar = false;
-            //pi.Owner = this;
         }
 
         private void SortList(object sender, SelectionChangedEventArgs e)
@@ -46,10 +41,10 @@ namespace StoreClient
             vm.SortProductsCommand.Execute(cmb.SelectedIndex);
         }
 
-        private void addProduct(object sender, MouseButtonEventArgs e)
+        private void AddProduct(object sender, MouseButtonEventArgs e)
         {
             Window test = new AddProduct();
-            test.Topmost = true; 
+            test.Topmost = true;
             test.Show();
         }
     }

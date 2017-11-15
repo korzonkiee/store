@@ -12,7 +12,7 @@ namespace StoreClient.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly IProductsService productsService;
+        public readonly IProductsService productsService;
 
         private ObservableCollection<Product> products = new ObservableCollection<Product>();
         public ObservableCollection<Product> Products
@@ -26,18 +26,24 @@ namespace StoreClient.ViewModel
         }
 
         public RelayCommand<int> SortProductsCommand { get; set; }
+        public RelayCommand<Product> AddProductCommand { get; set; }
 
         public MainViewModel(IProductsService productsService)
         {
             this.productsService = productsService;
             SortProductsCommand = new RelayCommand<int>((sortType) => SortProducts(sortType));
-
+            AddProductCommand = new RelayCommand<Product>((product) => AddProduct(product));
 
             Task.Run(async () =>
             {
                 var products = await productsService.GetProducts();
                 Products = new ObservableCollection<Product>(products);
             });
+        }
+
+        public void AddProduct(Product product)
+        {
+            Products.Add(product);
         }
 
         private void SortProducts(int sortType)

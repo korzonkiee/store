@@ -21,5 +21,14 @@ namespace StoreClient.Services
                 .For<IProductsServiceRefit>("http://localhost:5000")
                 .GetProducts();
         }
+
+        public async Task<List<Product>> GetProductById(String Id)
+        {
+            return await RestService
+                .For<IProductsServiceRefit>("http://localhost:5000")
+                .GetProductById();
+        }
     }
+
+
 }

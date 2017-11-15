@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using StoreClient.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,24 @@ namespace StoreClient
         {
             InitializeComponent();
         }
+
+        private void Card_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var id = ((Card)sender).Tag;
+
+            ProductInfo pi = new ProductInfo();
+            pi.Id = id.ToString(); 
+            pi.Show();
+            pi.ShowInTaskbar = false;
+            pi.Owner = this;
+        }
+
+        private void SortList(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cmb = sender as ComboBox;
+            var vm = DataContext as MainViewModel;
+            vm.SortProductsCommand.Execute(cmb.SelectedIndex);
+        }
+
     }
 }

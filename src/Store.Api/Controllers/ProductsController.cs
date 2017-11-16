@@ -41,7 +41,7 @@ namespace Store.Api.Controllers
         [HttpGet("search/{keyword}")]
         public IActionResult SearchForProductsByName(string keyword)
         {
-            IEnumerable<ProductDTO> products = productsService.GetPorductsByName(keyword);
+            var products = productsService.GetPorductsByName(keyword);
             if (products == null)
                 return NotFound();
             return Ok(products);

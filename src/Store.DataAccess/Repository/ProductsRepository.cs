@@ -24,7 +24,7 @@ namespace Store.DataAccess.Repository
             return context.Products.FirstOrDefault(p => p.Id == id);
         }
 
-        public IQueryable<Product> GetPorductsByName(string keyValue){
+        public IQueryable<Product> GetProductsByName(string keyValue){
             return context.Products.Where(s => s.Name.Contains(keyValue));
         }
 

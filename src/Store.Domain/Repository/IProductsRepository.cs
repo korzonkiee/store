@@ -5,6 +5,6 @@ namespace Store.Domain.Repository
 {
     public interface IProductsRepository : IRepository<Product>
     {
-        IQueryable<Product> GetPorductsByName(string keyValue);
+        IQueryable<Product> GetProductsByName(string keyValue);
     }
 }

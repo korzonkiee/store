@@ -35,9 +35,9 @@ namespace Store.Api.Services
             this.bus = bus;
         }
 
-        public IEnumerable<ProductDTO> GetPorductsByName(string keyValue)
+        public IEnumerable<ProductDTO> GetProductsByName(string keyValue)
         {
-            var products = productsRepository.GetPorductsByName(keyValue);
+            var products = productsRepository.GetProductsByName(keyValue);
             return products.ProjectTo<ProductDTO>();
         }
 

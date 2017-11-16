@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  store-api:
+    container_name: "store-api-container"
+    image: store-api-image
+    build:
+      context: ./src
+      dockerfile: ./Store.Api/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_URLS: "http://*:5000"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    links:
+      - store-database
+      
+  store-database:
+    container_name: "store-database-container"
+    image: store-database-image
+    ports:
+      - "1433:1433"
+    build: ./database
+    environment:
+      SA_PASSWORD: "MyVeryStronkPassword1!"
+      ACCEPT_EULA: "Y"

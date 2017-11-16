@@ -17,11 +17,13 @@ namespace Store.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(Schema);
+            
             modelBuilder.Entity<Category>(cfg =>
             {
                cfg.HasKey(e => e.Id);
                cfg.Property(e => e.Name).HasMaxLength(200); 
             });
+
             modelBuilder.Entity<Product>(cfg =>
             {
                 cfg.HasKey(e => e.Id);

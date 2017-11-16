@@ -12,7 +12,12 @@ namespace StoreClient.Services
     public interface IProductsService
     {
         Task<List<Product>> GetProducts();
+        Task<object> AddProductToDatabase(Product product);
+
+        Task<List<Product>> SearchProductsByName(String name);
     }
+
+
     public class ProductsService : IProductsService
     {
         public async Task<List<Product>> GetProducts()
@@ -28,7 +33,20 @@ namespace StoreClient.Services
                 .For<IProductsServiceRefit>("http://localhost:5000")
                 .GetProductById();
         }
+
+
+        public async Task AddProductToDatabase(Product product)
+        {
+            await RestService.For<IProductsServiceRefit>("http://localhost:5000").AddProduct(product);
+        }
+
+        public async Task<List<Product>> SearchProductsByName(String name)
+        {
+            return await RestService.For<IProductsServiceRefit>("http://localhost:5000").SearchProductsByName(name);
+        }
     }
 
 
 }
+
+

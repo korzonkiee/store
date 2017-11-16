@@ -1,5 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Practices.ServiceLocation;
 using StoreClient.ViewModel;
+using StoreClient.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,17 +27,12 @@ namespace StoreClient
         public MainWindow()
         {
             InitializeComponent();
+            var vm = DataContext as MainViewModel;
         }
 
         private void Card_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var id = ((Card)sender).Tag;
-
-            ProductInfo pi = new ProductInfo();
-            pi.Id = id.ToString(); 
-            pi.Show();
-            pi.ShowInTaskbar = false;
-            pi.Owner = this;
         }
 
         private void SortList(object sender, SelectionChangedEventArgs e)
@@ -45,5 +42,28 @@ namespace StoreClient
             vm.SortProductsCommand.Execute(cmb.SelectedIndex);
         }
 
+        private void AddProduct(object sender, MouseButtonEventArgs e)
+        {
+            Window test = new AddProduct();
+            test.Topmost = true;
+            test.Show();
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox_GotFocus;
+        }
+
+        private void SearchByName(object sender, MouseButtonEventArgs e)
+        {
+            var vm = DataContext as MainViewModel;
+            if (string.IsNullOrEmpty(searchByName.Text))
+            {
+                vm.GetAllProductsCommand.Execute(null);
+            }
+            else vm.SearchProductsByNameCommand.Execute(searchByName.Text);
+        }
     }
 }

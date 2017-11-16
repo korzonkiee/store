@@ -12,7 +12,7 @@ namespace StoreClient.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly IProductsService productsService;
+        public readonly IProductsService productsService;
 
         private ObservableCollection<Product> products = new ObservableCollection<Product>();
         public ObservableCollection<Product> Products
@@ -26,12 +26,19 @@ namespace StoreClient.ViewModel
         }
 
         public RelayCommand<int> SortProductsCommand { get; set; }
+        public RelayCommand<Product> AddProductCommand { get; set; }
+
+        public RelayCommand<String> SearchProductsByNameCommand { get; set; }
+
+        public RelayCommand GetAllProductsCommand { get; set; }
 
         public MainViewModel(IProductsService productsService)
         {
             this.productsService = productsService;
             SortProductsCommand = new RelayCommand<int>((sortType) => SortProducts(sortType));
-
+            AddProductCommand = new RelayCommand<Product>((product) => AddProduct(product));
+            SearchProductsByNameCommand = new RelayCommand<String>((name) => SearchProductsByName(name));
+            GetAllProductsCommand = new RelayCommand(GetAllProducts);
 
             Task.Run(async () =>
             {
@@ -39,6 +46,26 @@ namespace StoreClient.ViewModel
                 Products = new ObservableCollection<Product>(products);
             });
         }
+
+        private void SearchProductsByName(string name)
+        {
+            Task.Run(async () =>
+            {
+                var products = await productsService.SearchProductsByName(name);
+                Products = new ObservableCollection<Product>(products);
+            });
+        }
+
+        public void AddProduct(Product product)
+        {
+            Task.Run(async () =>
+            {
+                var response = await productsService.AddProductToDatabase(product);
+                int x = 3;
+            });
+        }
+
+
 
         private void SortProducts(int sortType)
         {
@@ -61,5 +88,17 @@ namespace StoreClient.ViewModel
                     break;
             }
         }
+
+        private void GetAllProducts()
+        {
+            Task.Run(async () =>
+            {
+                var products = await productsService.GetProducts();
+                Products = new ObservableCollection<Product>(products);
+            });
+        }
+
+
+
     }
 }

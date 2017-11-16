@@ -18,7 +18,7 @@ namespace Store.Api.Services
         ProductDTO GetProductById(Guid id);
         void AddProduct(ProductParams @params);
 
-        IEnumerable<ProductDTO> GetPorductsByName(string keyValue);
+        IEnumerable<ProductDTO> GetProductsByName(string keyValue);
     }
 
     public class ProductsService : IProductsService

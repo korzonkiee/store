@@ -22,7 +22,7 @@ namespace Store.Api.Tests.Controllers
             var productsService = Substitute.For<IProductsService>();
             productsService.GetAllProducts().Returns(new List<ProductDTO>());
 
-            var productsController = new ProductsController(productsService);
+            var productsController = new ProductsController(productsService, null);
 
             //Act
             var result = productsController.GetProducts();
@@ -40,7 +40,7 @@ namespace Store.Api.Tests.Controllers
             var productsService = Substitute.For<IProductsService>();
             productsService.GetAllProducts().Returns(testProducts);
 
-            var productsController = new ProductsController(productsService);
+            var productsController = new ProductsController(productsService, null);
 
             //Act
             var result = productsController.GetProducts();

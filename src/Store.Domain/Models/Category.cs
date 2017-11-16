@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Store.Domain.Models
 {
@@ -7,6 +8,8 @@ namespace Store.Domain.Models
         public Guid Id { get; private set; }
         public DateTime DateCreated { get; private set; }
         public string Name { get; private set; }
+        private readonly List<CategoryProduct> categoryProducts = new List<CategoryProduct>();
+        public IReadOnlyList<CategoryProduct> CategoryProducts => categoryProducts;
 
         public static Category Create(string name)
         {
@@ -16,6 +19,11 @@ namespace Store.Domain.Models
                 DateCreated = DateTime.Now,
                 Name = name
             };
+        }
+
+        public void AddCategoryProduct(CategoryProduct categoryProduct)
+        {
+            categoryProducts.Add(categoryProduct);
         }
     }
 }

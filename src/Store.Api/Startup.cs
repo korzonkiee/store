@@ -58,16 +58,19 @@ namespace Store.Api
             });
 
             // Repositories
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.AddScoped<IProductsRepository, ProductsRepository>();
 
             // EventHandlers
             services.AddScoped<INotificationHandler<DomainEvent>, DomainEventHandler>();
 
             // CommandHandlers
+            services.AddScoped<INotificationHandler<AddCategoryCommand>, AddCategoryCommandHandler>();
             services.AddScoped<INotificationHandler<AddProductCommand>, AddProductCommandHandler>();
             services.AddScoped<IBus, InMemoryBus>();
 
             // Services
+            services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IProductsService, ProductsService>();
 
             // Plugins

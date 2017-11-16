@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmHelpers;
 using GalaSoft.MvvmLight.Threading;
 
 namespace StoreClient.ViewModel
@@ -15,8 +16,8 @@ namespace StoreClient.ViewModel
     {
         public readonly IProductsService productsService;
 
-        private ObservableCollection<Product> products = new ObservableCollection<Product>();
-        public ObservableCollection<Product> Products
+        private ObservableRangeCollection<Product> products = new ObservableRangeCollection<Product>();
+        public ObservableRangeCollection<Product> Products
         {
             get { return products; }
             set
@@ -42,7 +43,7 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 var products = await productsService.GetProducts();
-                Products = new ObservableCollection<Product>(products);
+                Products = new ObservableRangeCollection<Product>(products);
             });
         }
 
@@ -51,7 +52,7 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 var products = await productsService.SearchProductsByName(name);
-                Products = new ObservableCollection<Product>(products);
+                Products = new ObservableRangeCollection<Product>(products);
             });
         }
 
@@ -60,10 +61,13 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 await productsService.AddProductToDatabase(product);
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                {
-                    Products.Add(product);
-                });
+                var products =  await productsService.GetProducts();
+                Products = new ObservableRangeCollection<Product>(products);
+                //DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                //{
+                //    Products = new ObservableRangeCollection<Product>(products);
+                //});
+
             });
         }
 
@@ -94,7 +98,7 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 var products = await productsService.GetProducts();
-                Products = new ObservableCollection<Product>(products);
+                Products = new ObservableRangeCollection<Product>(products);
             });
         }
     }

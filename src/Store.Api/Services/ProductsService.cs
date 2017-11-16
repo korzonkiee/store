@@ -17,6 +17,8 @@ namespace Store.Api.Services
         IEnumerable<ProductDTO> GetAllProducts();
         ProductDTO GetProductById(Guid id);
         void AddProduct(ProductParams @params);
+
+        IEnumerable<ProductDTO> GetPorductsByName(string keyValue);
     }
 
     public class ProductsService : IProductsService
@@ -31,6 +33,12 @@ namespace Store.Api.Services
             this.productsRepository = productsRepository;
             this.mapper = mapper;
             this.bus = bus;
+        }
+
+        public IEnumerable<ProductDTO> GetProductsByName(string keyValue)
+        {
+            var products = productsRepository.GetProductsByName(keyValue);
+            return products.ProjectTo<ProductDTO>();
         }
 
         public IEnumerable<ProductDTO> GetAllProducts()

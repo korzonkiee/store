@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 using Store.Api.ControllerParams;
 using Store.Api.Services;
 using Store.Domain.Events;
+using Store.Domain.Models;
+using Store.Infrastructure.DTOs;
 
 namespace Store.Api.Controllers
 {
@@ -35,11 +38,14 @@ namespace Store.Api.Controllers
             return Ok(product);
         }
 
-        // [HttpGet("search/{keyword}")]
-        // public IActionResult SearchForProductsByName(string keyword)
-        // {
-
-        // }
+        [HttpGet("search/{keyword}")]
+        public IActionResult SearchForProductsByName(string keyword)
+        {
+            IEnumerable<ProductDTO> products = productsService.GetPorductsByName(keyword);
+            if (products == null)
+                return NotFound();
+            return Ok(products);
+        }
 
         [HttpPost]
         public IActionResult Create([FromBody] ProductParams @params)

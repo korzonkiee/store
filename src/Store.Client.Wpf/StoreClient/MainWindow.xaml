@@ -35,7 +35,7 @@
                             <Grid>
                                 <materialDesign:Card Width="auto" Padding="32" Margin="8" MouseDoubleClick="Card_MouseDoubleClick" Tag="{Binding Id}">
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Margin="16" Source="https://www.2checkout.com/upload/images/graphic_product_tangible.png" Height="64" Width="64" />
+                                        <Image Margin="16" Source="{Binding ImageUrl}" Height="64" Width="64" />
                                         <StackPanel Margin="16, 16, 0, 0" Orientation="Vertical">
                                             <TextBlock Text="{Binding Name}"  />
                                             <TextBlock Text="{Binding Description}" />

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GalaSoft.MvvmLight.Threading;
 
 namespace StoreClient.ViewModel
 {
@@ -27,9 +28,7 @@ namespace StoreClient.ViewModel
 
         public RelayCommand<int> SortProductsCommand { get; set; }
         public RelayCommand<Product> AddProductCommand { get; set; }
-
         public RelayCommand<String> SearchProductsByNameCommand { get; set; }
-
         public RelayCommand GetAllProductsCommand { get; set; }
 
         public MainViewModel(IProductsService productsService)
@@ -60,12 +59,13 @@ namespace StoreClient.ViewModel
         {
             Task.Run(async () =>
             {
-                var response = await productsService.AddProductToDatabase(product);
-                int x = 3;
+                await productsService.AddProductToDatabase(product);
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    Products.Add(product);
+                });
             });
         }
-
-
 
         private void SortProducts(int sortType)
         {
@@ -97,8 +97,5 @@ namespace StoreClient.ViewModel
                 Products = new ObservableCollection<Product>(products);
             });
         }
-
-
-
     }
 }

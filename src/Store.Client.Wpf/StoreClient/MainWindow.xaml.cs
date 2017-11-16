@@ -44,9 +44,9 @@ namespace StoreClient
 
         private void AddProduct(object sender, MouseButtonEventArgs e)
         {
-            Window test = new AddProduct();
-            test.Topmost = true;
-            test.Show();
+            Window addProductWindow = new AddProduct();
+            addProductWindow.Topmost = true;
+            addProductWindow.Show();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)

@@ -34,11 +34,14 @@
                 <TextBox Name="imageUrl" Text="image url" Margin="10" VerticalAlignment="Center" GotFocus="TextBox_GotFocus" MinWidth="20"></TextBox>
             </StackPanel>
             <StackPanel  Margin="10" Orientation="Horizontal">
-                <ComboBox  Margin="10"  IsEditable="True" IsReadOnly="True" Text="Type">
-                    <ComboBoxItem>type 1</ComboBoxItem>
+                <ComboBox  Margin="10"  IsEditable="True" IsReadOnly="True" Text="Category">
+                    <ComboBoxItem>Default</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
-            <Button Margin="10" Width="100" HorizontalAlignment="Left" MouseDoubleClick="AddItem">Add Item</Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10" Width="100" HorizontalAlignment="Left" MouseDoubleClick="AddItem">Add Item</Button>
+                <TextBlock Name="wrongProduct" Text="Wrong Data" Margin="20" Visibility="Hidden" Foreground="DarkRed"/>
+            </StackPanel>
         </StackPanel>
         <Label Content="Label" HorizontalAlignment="Left" Margin="0,-64,0,0" VerticalAlignment="Top"/>
     </Grid>

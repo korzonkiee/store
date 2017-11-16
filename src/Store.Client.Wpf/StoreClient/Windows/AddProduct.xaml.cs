@@ -37,18 +37,29 @@ namespace StoreClient.Windows
 
         private void AddItem(object sender, MouseButtonEventArgs e)
         {
-            Product product = new Product
+            if (name.Text.Length > 1 && description.Text.Length > 1 && price.Text.Length >= 1 && imageUrl.Text.Length > 1 )
             {
-                Id = Guid.Empty,
-                Name = name.Text,
-                Description = description.Text,
-                Price = (Decimal.Parse(price.Text)),
-                ImageUrl = imageUrl.Text
+                try
+                {
+                    Product product = new Product
+                    {
+                        Id = Guid.Empty,
+                        Name = name.Text,
+                        Description = description.Text,
+                        Price = (Decimal.Parse(price.Text)),
+                        ImageUrl = imageUrl.Text
+                    };
+                    ServiceLocator.Current.GetInstance<MainViewModel>().AddProductCommand.Execute(product);
+                    this.Close();
+                }
+                catch (Exception)
+                {
+                    wrongProduct.Visibility = Visibility.Visible;
+                }
+            }
+            else 
+                wrongProduct.Visibility = Visibility.Visible;
 
-            };
-        
-            ServiceLocator.Current.GetInstance<MainViewModel>().AddProductCommand.Execute(product);
-            this.Close();
         }
     }
 }

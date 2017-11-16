@@ -12,7 +12,7 @@ namespace StoreClient.Services
     public interface IProductsService
     {
         Task<List<Product>> GetProducts();
-        Task<object> AddProductToDatabase(Product product);
+        Task AddProductToDatabase(Product product);
 
         Task<List<Product>> SearchProductsByName(String name);
     }

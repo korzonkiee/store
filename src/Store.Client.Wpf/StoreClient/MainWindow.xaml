@@ -16,35 +16,43 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        <ComboBox Text="Sort by" Margin="0,0,10,0" VerticalAlignment="Top" Height="30" SelectionChanged="SortList">
-            <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
-            <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
-            <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
-        </ComboBox>
-        <ScrollViewer Margin="0,30,0,0">
-            <ListView ItemsSource="{Binding Products}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <materialDesign:Card Width="auto" Padding="32" Margin="8" MouseDoubleClick="Card_MouseDoubleClick" Tag="{Binding Id}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Margin="16" Source="https://www.2checkout.com/upload/images/graphic_product_tangible.png" Height="64" Width="64" />
-                                    <StackPanel Margin="16, 16, 0, 0" Orientation="Vertical">
-                                        <TextBlock Text="{Binding Name}"  />
-                                        <TextBlock Text="{Binding Description}" />
+        <ScrollViewer Margin="10">
+            <StackPanel Orientation="Vertical">
+                <ComboBox Margin ="10" IsEditable="True" IsReadOnly="True" Text="Sort By:" VerticalAlignment="Top" Height="30" SelectionChanged="SortList">
+                    <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
+                    <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
+                    <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
+                </ComboBox>
+                <DockPanel>
+                    <Button Margin ="10" Content="Search by name" MouseDoubleClick="SearchByName" HorizontalAlignment="Right"></Button>
+                    <TextBox Name="searchByName" Margin ="10" Text="Search by name" VerticalAlignment="Center" GotFocus="TextBox_GotFocus"  MinWidth="20"/>
+                    <Button Margin ="10" Content="Add new item" MouseDoubleClick="AddProduct" HorizontalAlignment="Right"></Button>
+                </DockPanel>
+
+                <ListView ItemsSource="{Binding Products}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <materialDesign:Card Width="auto" Padding="32" Margin="8" MouseDoubleClick="Card_MouseDoubleClick" Tag="{Binding Id}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Margin="16" Source="https://www.2checkout.com/upload/images/graphic_product_tangible.png" Height="64" Width="64" />
+                                        <StackPanel Margin="16, 16, 0, 0" Orientation="Vertical">
+                                            <TextBlock Text="{Binding Name}"  />
+                                            <TextBlock Text="{Binding Description}" />
+                                        </StackPanel>
+                                        <TextBlock FontSize="24" Margin="16, 16, 0, 0" Text="{Binding Price}" />
                                     </StackPanel>
-                                    <TextBlock FontSize="24" Margin="16, 16, 0, 0" Text="{Binding Price}" />
-                                </StackPanel>
-                            </materialDesign:Card>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+                                </materialDesign:Card>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Window>

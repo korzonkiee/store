@@ -50,6 +50,7 @@ namespace StoreClient.Windows
                         ImageUrl = imageUrl.Text
                     };
                     ServiceLocator.Current.GetInstance<MainViewModel>().AddProductCommand.Execute(product);
+                    
                     this.Close();
                 }
                 catch (Exception)

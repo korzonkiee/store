@@ -10,15 +10,17 @@ namespace Store.Domain.Commands
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public TimeSpan DeliveryTime { get; set; }
+        public Guid? CategoryId { get; set; }
 
         public AddProductCommand(string name, string desc, decimal price,
-            string imageUrl, TimeSpan deliveryTime)
+            string imageUrl, TimeSpan deliveryTime, Guid? categoryId)
         {
             ProductName = name;
             Description = desc;
             Price = price;
             ImageUrl = imageUrl;
             DeliveryTime = deliveryTime;
+            CategoryId = categoryId;
         }
 
         public override bool IsValid()

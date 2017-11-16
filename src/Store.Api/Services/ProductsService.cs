@@ -62,7 +62,8 @@ namespace Store.Api.Services
                 @params.Description,
                 @params.Price,
                 @params.ImageUrl,
-                @params.DeliveryTime);
+                @params.DeliveryTime,
+                @params.CategoryId);
                 
             bus.SendCommand(addProductCommand);
         }

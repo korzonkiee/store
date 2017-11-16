@@ -8,7 +8,8 @@ namespace Store.Domain.Models
         public Guid Id { get; private set; }
         public DateTime DateCreated { get; private set; }
         public string Name { get; private set; }
-        public List<Product> Products;
+        private readonly List<CategoryProduct> categoryProducts = new List<CategoryProduct>();
+        public IReadOnlyList<CategoryProduct> CategoryProducts => categoryProducts;
 
         public static Category Create(string name)
         {
@@ -16,9 +17,13 @@ namespace Store.Domain.Models
             {
                 Id = Guid.NewGuid(),
                 DateCreated = DateTime.Now,
-                Name = name,
-                Products = new List<Product>()
+                Name = name
             };
+        }
+
+        public void AddCategoryProduct(CategoryProduct categoryProduct)
+        {
+            categoryProducts.Add(categoryProduct);
         }
     }
 }

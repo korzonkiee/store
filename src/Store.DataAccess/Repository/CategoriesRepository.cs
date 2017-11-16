@@ -24,6 +24,18 @@ namespace Store.DataAccess.Repository
             return context.Categories.FirstOrDefault(c => c.Id == id);
         }
 
+        public void AddCategoryProduct(CategoryProduct categoryProduct)
+        {
+            var category = context.Categories
+                .Where(c => c.Id == categoryProduct.CategoryId)
+                .FirstOrDefault();
+
+            if (category != null)
+            {
+                category.AddCategoryProduct(categoryProduct);
+            }
+        }
+
         public void Add(Category entity)
         {
             context.Categories.Add(entity);

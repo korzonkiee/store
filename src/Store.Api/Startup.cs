@@ -4,15 +4,18 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using IdentityServer4;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Store.Api.IdentityServer;
 using Store.Api.Services;
 using Store.DataAccess;
 using Store.DataAccess.Repository;
@@ -43,6 +46,8 @@ namespace Store.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureIdentityServer(services);
+
             services.AddDbContext<CoreDbContext>(opts =>
             {
                 var connectionString = Configuration.GetConnectionString("Database");
@@ -51,6 +56,10 @@ namespace Store.Api
                     cfg.MigrationsAssembly("Store.Migrations");
                 });
             });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<CoreDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddSwaggerGen(c =>
             {
@@ -80,6 +89,13 @@ namespace Store.Api
             services.AddMvc();
         }
 
+        private void ConfigureIdentityServer(IServiceCollection services)
+        {
+            services.AddIdentityServer()
+                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+                .AddInMemoryClients(IdentityServerConfig.GetClients());
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -96,6 +112,8 @@ namespace Store.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Store API V1");
             });
+
+            app.UseIdentityServer();
 
             app.UseMvc();
         }

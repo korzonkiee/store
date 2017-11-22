@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Store.Domain.Models;
 
 namespace Store.DataAccess
 {
-    public class CoreDbContext : DbContext
+    public class CoreDbContext : IdentityDbContext<IdentityUser>
     {
         public const string Schema = "core";
 
@@ -16,6 +18,8 @@ namespace Store.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.HasDefaultSchema(Schema);
 
             modelBuilder.Entity<Product>(cfg =>

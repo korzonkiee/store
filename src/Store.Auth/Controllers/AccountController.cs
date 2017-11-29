@@ -2,25 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Store.Auth.ControllerParams;
+using Store.Domain.Events;
+using Store.Domain.Services;
 
 namespace Store.Auth.Controllers
 {
     [Route("auth/account")]
-    public class AccountController : Controller
+    public class AccountController : BaseAuthController
     {
-        private readonly UserManager<IdentityUser> userManager;
-
-        public AccountController(UserManager<IdentityUser> userManager)
+        private readonly IRegisterUserService registerUserService;
+        public AccountController(IRegisterUserService registerUserService,
+            INotificationHandler<DomainEvent> events) : base(events)
         {
-            this.userManager = userManager;
+            this.registerUserService = registerUserService;
         }
-        
-        [HttpGet]
+
+        [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(string username, string password)
+        public async Task<IActionResult> Register([FromBody] RegisterUserParams @params)
         {
+            await registerUserService.RequestRegistration(@params.Email, @params.Password);
+            return ActionResponse(@params.Email);
         }
     }
 }

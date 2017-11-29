@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Validation;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Store.Auth.IdentityServer;
+using Store.Auth.Services;
+using Store.Domain.Bus;
+using Store.Domain.CommandHandlers;
+using Store.Domain.Commands;
+using Store.Domain.EventHandlers;
+using Store.Domain.Events;
+using Store.Domain.Services;
+using Store.Infrastructure.Bus;
 
 namespace Store.Auth
 {
@@ -51,7 +60,19 @@ namespace Store.Auth
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;                
             });
 
+            services.AddMediatR(typeof(Startup));
+
             services.AddMvc();
+
+            //Services
+            services.AddTransient<IRegisterUserService, RegisterUserService>();
+
+            //Event handlers
+            services.AddScoped<INotificationHandler<DomainEvent>, DomainEventHandler>();
+
+            // CommandHandlers
+            services.AddScoped<IAsyncNotificationHandler<RegisterUserCommand>, RegisterUserCommandHandler>();
+            services.AddScoped<IBus, InMemoryBus>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

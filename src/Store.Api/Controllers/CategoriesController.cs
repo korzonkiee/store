@@ -7,7 +7,7 @@ using Store.Domain.Events;
 
 namespace Store.Api.Controllers
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     public class CategoriesController : BaseApiController
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IdentityServer4.Models;
 using static IdentityServer4.IdentityServerConstants;
 
-namespace Store.Api.IdentityServer
+namespace Store.Auth.IdentityServer
 {
     public static class IdentityServerConfig
     {
@@ -12,11 +12,11 @@ namespace Store.Api.IdentityServer
             {
                 new Client()
                 {
-                    ClientId = "store",
-                    ClientName = "Store",
+                    ClientId = "store_manager",
+                    ClientName = "Store Manager",
                     AllowedGrantTypes =
                     {
-                        GrantType.ResourceOwnerPassword,
+                        GrantType.ResourceOwnerPassword
                     },
                     AllowOfflineAccess = true,
                     RequireClientSecret = false,
@@ -24,7 +24,8 @@ namespace Store.Api.IdentityServer
                     AllowedScopes =
                     {
                         StandardScopes.OpenId,
-                        StandardScopes.Email
+                        StandardScopes.Email,
+                        "store_management"
                     }
                 }
             };
@@ -37,6 +38,14 @@ namespace Store.Api.IdentityServer
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
                 new IdentityResources.Phone()
+            };
+        }
+
+        public static List<ApiResource> GetApiResources()
+        {
+            return new List<ApiResource>
+            {
+                new ApiResource("store-management", new string[] { "role" })
             };
         }
     }

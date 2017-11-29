@@ -5,14 +5,14 @@ using Store.Domain.Models;
 
 namespace Store.DataAccess
 {
-    public class CoreDbContext : IdentityDbContext<IdentityUser>
+    public class CoreDbContext : DbContext
     {
         public const string Schema = "core";
 
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<Product> Products => Set<Product>();
 
-        public CoreDbContext(DbContextOptions options)
+        public CoreDbContext(DbContextOptions<CoreDbContext> options)
             : base(options)
         { }
 

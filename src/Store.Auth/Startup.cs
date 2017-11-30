@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Store.Auth.Facebook;
 using Store.Auth.IdentityServer;
 using Store.Auth.Services;
 using Store.Domain.Bus;
@@ -63,6 +64,9 @@ namespace Store.Auth
             services.AddMediatR(typeof(Startup));
 
             services.AddMvc();
+
+            //Facebook
+            services.AddScoped<FacebookClient, FacebookClient>();
 
             //Services
             services.AddTransient<IRegisterUserService, RegisterUserService>();

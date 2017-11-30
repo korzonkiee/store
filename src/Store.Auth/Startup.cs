@@ -53,6 +53,7 @@ namespace Store.Auth
                 .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
                 .AddInMemoryClients(IdentityServerConfig.GetClients())
+                .AddExtensionGrantValidator<FacebookGrantValidator>()
                 .AddDeveloperSigningCredential()
                 .AddAspNetIdentity<IdentityUser>();
 

@@ -94,6 +94,8 @@ namespace Store.Api
             .AddJwtBearer(cfg =>
             {
                 cfg.Authority = Configuration["Identity:Address"];
+                cfg.TokenValidationParameters.ValidateAudience = false;
+
                 cfg.RequireHttpsMetadata = false;
 
                 cfg.TokenValidationParameters.RoleClaimType = "role";

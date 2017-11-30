@@ -16,7 +16,8 @@ namespace Store.Auth.IdentityServer
                     ClientName = "Store Manager",
                     AllowedGrantTypes =
                     {
-                        GrantType.ResourceOwnerPassword
+                        GrantType.ResourceOwnerPassword,
+                        "facebook"
                     },
                     AllowOfflineAccess = true,
                     RequireClientSecret = false,

@@ -26,6 +26,7 @@ namespace StoreClient.ViewModel
                 RaisePropertyChanged(nameof(Products));
             }
         }
+       // private ObservableCollection<Category> categories = new ObservableCollection<Categori>
 
         public RelayCommand<int> SortProductsCommand { get; set; }
         public RelayCommand<Product> AddProductCommand { get; set; }

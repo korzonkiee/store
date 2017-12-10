@@ -95,8 +95,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DTOs\Category.cs" />
     <Compile Include="DTOs\Product.cs" />
+    <Compile Include="Services\CategoriesService.cs" />
     <Compile Include="Services\ProductsService.cs" />
+    <Compile Include="Services\Refit\ICategoriesServiceRefit.cs" />
     <Compile Include="Services\Refit\IProductsServiceRefit.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

@@ -18,6 +18,7 @@ namespace Store.Api.Controllers
             this.categoriesService = categoriesService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetProducts()
         {

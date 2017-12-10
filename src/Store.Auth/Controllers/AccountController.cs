@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Store.Auth.ControllerParams;
@@ -11,6 +12,7 @@ using Store.Domain.Services;
 
 namespace Store.Auth.Controllers
 {
+    [AllowAnonymous]
     [Route("auth/account")]
     public class AccountController : BaseAuthController
     {
@@ -20,6 +22,8 @@ namespace Store.Auth.Controllers
         {
             this.registerUserService = registerUserService;
         }
+
+        
 
         [HttpPost]
         [Route("register")]

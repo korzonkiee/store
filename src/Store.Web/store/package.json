@@ -1,0 +1,8 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "description": "Web application that allows to buy different products.",
+  "main": "index.js",
+  "author": "Rootie",
+  "license": "MIT"
+}

@@ -53,12 +53,26 @@ namespace StoreClient
 
         private void SearchByName(object sender, MouseEventArgs e)
         {
-            //var vm = DataContext as MainViewModel;
-            //if (string.IsNullOrEmpty(searchByName.Text))
-            //{
-            //    vm.GetAllProductsCommand.Execute(null);
-            //}
-            //else vm.SearchProductsByNameCommand.Execute(searchByName.Text);
+            var vm = DataContext as MainViewModel;
+            if (string.IsNullOrEmpty(searchByName.Text))
+            {
+                vm.GetAllProductsCommand.Execute(null);
+            }
+            else vm.SearchProductsByNameCommand.Execute(searchByName.Text);
+        }
+
+        private void OnKeyDownHandler(object sender, KeyRoutedEventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "Return":
+                    var vm = DataContext as MainViewModel;
+                    if (string.IsNullOrEmpty(searchByName.Text))
+                    {
+                        vm.GetAllProductsCommand.Execute(null);
+                    }
+                    else vm.SearchProductsByNameCommand.Execute(searchByName.Text); break;
+            }
         }
     }
 }

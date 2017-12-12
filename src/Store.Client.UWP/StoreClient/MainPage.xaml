@@ -9,13 +9,18 @@
     DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Grid>
-        <ScrollViewer Margin="10">
+        <ComboBox  Margin ="30" VerticalAlignment="Top" Height="30" SelectionChanged="SortList" AllowDrop="True">
+            <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
+            <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
+            <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
+            <ComboBoxItem Margin="0,0,10,0" IsSelected="True" Visibility="Collapsed">SortBy</ComboBoxItem>
+        </ComboBox>
+        <RelativePanel>
+            <TextBox Name="searchByName" Margin ="10" Text="Search by name" VerticalAlignment="Center" GotFocus="TextBox_GotFocus"  MinWidth="20" KeyDown="OnKeyDownHandler"/>
+            
+        </RelativePanel>
+        <ScrollViewer Margin="10, 70, 10, 10">
             <StackPanel>
-                <ComboBox Margin ="10" Header="Sort By:" VerticalAlignment="Top" Height="30" SelectionChanged="SortList">
-                    <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
-                    <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
-                    <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
-                </ComboBox>
                 <ListView Name="ProductsListView" ItemsSource="{Binding Products}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -31,11 +36,11 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <!--<ListView.ItemContainerStyle>
+                    <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
-                    </ListView.ItemContainerStyle>-->
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </StackPanel>
         </ScrollViewer>

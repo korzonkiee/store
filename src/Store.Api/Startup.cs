@@ -95,6 +95,7 @@ namespace Store.Api
             {
                 cfg.Authority = Configuration["Identity:Address"];
                 cfg.TokenValidationParameters.ValidateAudience = false;
+                cfg.TokenValidationParameters.ValidateIssuer = false;
 
                 cfg.RequireHttpsMetadata = false;
 

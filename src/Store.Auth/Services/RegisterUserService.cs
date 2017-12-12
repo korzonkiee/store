@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Store.Auth.ControllerParams;
@@ -27,6 +28,7 @@ namespace Store.Auth.Services
             };
 
             var result = await userManager.CreateAsync(user, password);
+            await userManager.AddClaimAsync(user, new Claim("role", "user"));
 
             return result.Succeeded;
         }

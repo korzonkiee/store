@@ -27,6 +27,7 @@ namespace StoreClient
         public MainPage()
         {
             this.InitializeComponent();
+            var vm = DataContext as MainViewModel;
         }
 
         private void SortList(object sender, SelectionChangedEventArgs e)

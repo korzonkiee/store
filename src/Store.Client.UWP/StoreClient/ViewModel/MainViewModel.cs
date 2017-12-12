@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmHelpers;
 using GalaSoft.MvvmLight.Threading;
+using Windows.UI.Core;
+using Windows.ApplicationModel.Core;
 
 namespace StoreClient.ViewModel
 {
@@ -16,8 +18,8 @@ namespace StoreClient.ViewModel
     {
         public readonly IProductsService productsService;
 
-        private ObservableRangeCollection<Product> products = new ObservableRangeCollection<Product>();
-        public ObservableRangeCollection<Product> Products
+        private ObservableCollection<Product> products = new ObservableCollection<Product>();
+        public ObservableCollection<Product> Products
         {
             get { return products; }
             set
@@ -41,10 +43,14 @@ namespace StoreClient.ViewModel
             SearchProductsByNameCommand = new RelayCommand<String>((name) => SearchProductsByName(name));
             GetAllProductsCommand = new RelayCommand(GetAllProducts);
 
+
             Task.Run(async () =>
             {
                 var products = await productsService.GetProducts();
-                Products = new ObservableRangeCollection<Product>(products);
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Products = new ObservableCollection<Product>(products);
+                });
             });
         }
 
@@ -53,7 +59,7 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 var products = await productsService.SearchProductsByName(name);
-                Products = new ObservableRangeCollection<Product>(products);
+                Products = new ObservableCollection<Product>(products);
             });
         }
 
@@ -63,7 +69,7 @@ namespace StoreClient.ViewModel
             {
                 await productsService.AddProductToDatabase(product);
                 var products =  await productsService.GetProducts();
-                Products = new ObservableRangeCollection<Product>(products);
+                Products = new ObservableCollection<Product>(products);
                 //DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 //{
                 //    Products = new ObservableRangeCollection<Product>(products);
@@ -99,7 +105,7 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 var products = await productsService.GetProducts();
-                Products = new ObservableRangeCollection<Product>(products);
+                Products = new ObservableCollection<Product>(products);
             });
         }
     }

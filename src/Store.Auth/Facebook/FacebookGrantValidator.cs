@@ -74,6 +74,7 @@ namespace Store.Auth.Facebook
             var user = new IdentityUser()
             {
                 Email = facebookUser.Email,
+                UserName = facebookUser.Email,
                 Id = facebookUser.Id
             };
 

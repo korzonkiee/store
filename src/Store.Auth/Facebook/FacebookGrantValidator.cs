@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Identity;
@@ -80,15 +81,17 @@ namespace Store.Auth.Facebook
         private async Task<FacebookRegisterUserResult> RegisterUser(FacebookUser facebookUser)
         {
             Console.WriteLine("Beggining registration process...");
-            
+
             var user = new IdentityUser()
             {
                 Email = facebookUser.Email,
                 UserName = facebookUser.Email,
-                Id = facebookUser.Id
+                Id = Guid.NewGuid().ToString()
             };
 
-            var result = await userManager.CreateAsync(user);
+            Console.WriteLine($"Initialized IdentityUser with id: {user.Id}");
+
+            var result = await userManager.Create
             if (result.Succeeded)
             {
                 return new FacebookRegisterUserResult()

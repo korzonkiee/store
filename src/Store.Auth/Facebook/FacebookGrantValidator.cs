@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
@@ -46,13 +48,28 @@ namespace Store.Auth.Facebook
             var user = await userManager.FindByLoginAsync(GrantType, facebookUser.Id);
             if (user == null)
             {
-                RegisterUser(facebookUser);
+                var result = await RegisterUser(facebookUser);
+                if (result.IsSuccess)
+                    user = result.User;
+                else
+                    HandleFacebookRegistrationFailure(context, result.ErrorString);
             }
 
-            context.Result = new GrantValidationResult(user.Id.ToString(), GrantType);
+            if (user != null)
+            {
+                context.Result = new GrantValidationResult(user.Id.ToString(), GrantType);
+            }
         }
 
-        private void RegisterUser(FacebookUser facebookUser)
+        private void HandleFacebookRegistrationFailure(ExtensionGrantValidationContext context, string errors)
+        {
+            context.Result = new GrantValidationResult(
+                FacebookConsts.Errors.CouldNotRegisterUser,
+                errors                                
+            );
+        }
+
+        private async Task<FacebookRegisterUserResult> RegisterUser(FacebookUser facebookUser)
         {
             var user = new IdentityUser()
             {
@@ -60,7 +77,33 @@ namespace Store.Auth.Facebook
                 Id = facebookUser.Id
             };
 
-            userManager.CreateAsync(user);
+            var result = await userManager.CreateAsync(user);
+            if (result.Succeeded)
+            {
+                return new FacebookRegisterUserResult()
+                {
+                    IsSuccess = true,
+                    User = user
+                };
+            }
+            else
+            {
+                return new FacebookRegisterUserResult()
+                {
+                    IsSuccess = false,
+                    ErrorString = GetFacebookRegistrationErrorString(result.Errors)
+                };
+            }
+        }
+
+        private string GetFacebookRegistrationErrorString(IEnumerable<IdentityError> errors)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var error in errors)
+            {
+                stringBuilder.Append($"{error.Description},");
+            }
+            return stringBuilder.ToString();
         }
     }
 }

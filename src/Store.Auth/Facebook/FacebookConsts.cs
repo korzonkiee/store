@@ -9,7 +9,7 @@ namespace Store.Auth.Facebook
         {
             public const string NoAssertion = "facebook_no_assertion";
             public const string InvalidAssertion = "facebook_invalid_assertion";
-            public const string UserNotRegistered = "facebook_user_not_registered";
+            public const string CouldNotRegisterUser = "could_not_register_user";
         }
     }
 }

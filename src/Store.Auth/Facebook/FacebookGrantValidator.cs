@@ -46,13 +46,21 @@ namespace Store.Auth.Facebook
             var user = await userManager.FindByLoginAsync(GrantType, facebookUser.Id);
             if (user == null)
             {
-                context.Result = new GrantValidationResult(
-                    TokenRequestErrors.InvalidGrant,
-                    FacebookConsts.Errors.UserNotRegistered);
-                return;
+                RegisterUser(facebookUser);
             }
 
             context.Result = new GrantValidationResult(user.Id.ToString(), GrantType);
+        }
+
+        private void RegisterUser(FacebookUser facebookUser)
+        {
+            var user = new IdentityUser()
+            {
+                Email = facebookUser.Email,
+                Id = facebookUser.Id
+            };
+
+            userManager.CreateAsync(user);
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using StoreClient.DTOs;
+using StoreClient.Services;
 using StoreClient.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -55,6 +57,20 @@ namespace StoreClient.Views
             else emailError.Visibility = Visibility.Visible;
         }
 
+        private void RegisterWithFacebook(object sender, RoutedEventArgs e)
+        {
+            var loginService = new LoginService();
+            Task.Run(async () =>
+            {
+                await loginService.Logout();
+                var result = await loginService.LoginWithFacebook();
+                if (result.IsSuccess)
+                {
+                    this.Frame.Navigate(typeof(MainPage));
+                }
+            });
+        }
+        
         private bool IsValidEmail(string email)
         {
             try

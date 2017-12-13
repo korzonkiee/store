@@ -48,11 +48,19 @@ namespace Store.Auth.Facebook
             var user = await userManager.FindByLoginAsync(GrantType, facebookUser.Id);
             if (user == null)
             {
+                Console.WriteLine($"Could not find user with id: {facebookUser.Id}");
+                Console.WriteLine("Registering user...");
                 var result = await RegisterUser(facebookUser);
                 if (result.IsSuccess)
+                {
+                    Console.WriteLine($"Successfully created user with id: {result.User.Id}");
                     user = result.User;
+                }
                 else
+                {
+                    Console.WriteLine($"Could not create user. Error: {result.ErrorString}");
                     HandleFacebookRegistrationFailure(context, result.ErrorString);
+                }
             }
 
             if (user != null)
@@ -71,6 +79,8 @@ namespace Store.Auth.Facebook
 
         private async Task<FacebookRegisterUserResult> RegisterUser(FacebookUser facebookUser)
         {
+            Console.WriteLine("Beggining registration process...");
+            
             var user = new IdentityUser()
             {
                 Email = facebookUser.Email,

@@ -28,7 +28,6 @@ namespace Store.Auth.Services
             };
 
             var result = await userManager.CreateAsync(user, password);
-            await userManager.AddClaimAsync(user, new Claim("role", "user"));
 
             return result.Succeeded;
         }

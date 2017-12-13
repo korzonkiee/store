@@ -50,7 +50,6 @@ namespace Store.Auth.Facebook
             if (user == null)
             {
                 Console.WriteLine($"Could not find user with id: {facebookUser.Id}");
-                Console.WriteLine("Registering user...");
                 var result = await RegisterUser(facebookUser);
                 if (result.IsSuccess)
                 {
@@ -94,6 +93,11 @@ namespace Store.Auth.Facebook
             var result = await userManager.CreateAsync(user);
             if (result.Succeeded)
             {
+                await userManager.AddLoginAsync(user, new UserLoginInfo(
+                    FacebookConsts.GrantType,
+                    facebookUser.Id,
+                    "Facebook"));
+
                 return new FacebookRegisterUserResult()
                 {
                     IsSuccess = true,

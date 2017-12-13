@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="StoreClient.Views.Registration"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoreClient.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sc="using:StoreClient"
+    mc:Ignorable="d">
+
+    <Grid Background="#5271ff">
+        <StackPanel Orientation="Vertical">
+            <Image Margin="16" Source="Store 2.0 (2).jpg" Height="300" Width="300" HorizontalAlignment="Center" Visibility="Visible"/>
+            <TextBlock Margin="10" Text="Register New User" HorizontalAlignment="Center" FontSize="30" Foreground="#a7e66e"/>
+
+            <Grid HorizontalAlignment="Center">
+                <StackPanel  Margin="10" Orientation="Horizontal">
+                    <TextBlock Margin="10" Text="Email:" VerticalAlignment="Center" Foreground="#a7e66e"/>
+                    <TextBox x:Name="email"  Text="email" Margin="10" VerticalAlignment="Center" IsFocusEngaged="False" GotFocus="TextBox_GotFocus" MinWidth="50" Background="#00c4cc" Foreground="#a7e66e"/>
+                    <TextBlock Name="emailError" Margin="10" Text="Incorrect email" Visibility="Collapsed" VerticalAlignment="Center" Foreground="#a7e66e"/>
+                </StackPanel>
+            </Grid>
+            <Grid HorizontalAlignment="Center">
+                <StackPanel  Margin="10" Orientation="Horizontal">
+                    <TextBlock Margin="10" Text="Password:" VerticalAlignment="Center" Foreground="#a7e66e"/>
+                    <TextBox Name="password"  Text="password" Margin="10" VerticalAlignment="Center" GotFocus="TextBox_GotFocus" MinWidth="50" Background="#00c4cc" Foreground="#a7e66e"/>
+                    <TextBlock Name="passwordError" Margin="10" Text="To short password (min 8 characters)" Visibility="Collapsed" VerticalAlignment="Center" Foreground="#a7e66e"/>
+                </StackPanel>
+            </Grid>
+            <Button Margin="10" Content="Register" Name="register" Click="RegiserNewUser" Foreground="#a7e66e" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>

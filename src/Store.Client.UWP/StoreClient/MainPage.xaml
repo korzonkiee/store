@@ -6,26 +6,34 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    
     DataContext="{Binding Main, Source={StaticResource Locator}}">
-
-    <Grid>
-        <ComboBox  Margin ="30" VerticalAlignment="Top" Height="30" SelectionChanged="SortList" AllowDrop="True">
-            <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
-            <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
-            <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
-            <ComboBoxItem Margin="0,0,10,0" IsSelected="True" Visibility="Collapsed">SortBy</ComboBoxItem>
-        </ComboBox>
-        <RelativePanel>
-            <TextBox Name="searchByName" Margin ="10" Text="Search by name" VerticalAlignment="Center" GotFocus="TextBox_GotFocus"  MinWidth="20" KeyDown="OnKeyDownHandler"/>
-            
-        </RelativePanel>
-        <ScrollViewer Margin="10, 70, 10, 10">
-            <StackPanel>
-                <ListView Name="ProductsListView" ItemsSource="{Binding Products}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <StackPanel Orientation="Horizontal">
+    <Page.Resources>
+        <SolidColorBrush x:Key="BlueColor" Color="#00c4cc" />
+    </Page.Resources>
+    <Grid Background="#5271ff">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Add product" Click="AddProduct" Margin="20" Background="{StaticResource BlueColor}"/>
+                <Button Content="Register" Click="Register" Margin="20" Background="{StaticResource BlueColor}"/>
+            </StackPanel>
+            <ComboBox  Margin ="20" VerticalAlignment="Top" Height="30" SelectionChanged="SortList" AllowDrop="True" Background="{StaticResource BlueColor}">
+                <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
+                <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
+                <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
+                <ComboBoxItem Margin="0,0,10,0" IsSelected="True" Visibility="Collapsed">SortBy</ComboBoxItem>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBox x:Name="searchByName" Margin ="20" Text="Search by name" GotFocus="TextBox_GotFocus"  MinWidth="20" Background="{StaticResource BlueColor}"/>
+                <Button Content="Search by name" Click="SearchByName" Background="{StaticResource BlueColor}"/>
+            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" >
+                <StackPanel>
+                    <ListView Name="ProductsListView" ItemsSource="{Binding Products}" Background="#a7e66e" Margin="30">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="10">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
                                         <Image Margin="16" Source="{Binding ImageUrl}" Height="64" Width="64" />
                                         <StackPanel Margin="16, 16, 0, 0" Orientation="Vertical">
                                             <TextBlock Text="{Binding Name}"  />
@@ -33,16 +41,18 @@
                                         </StackPanel>
                                         <TextBlock FontSize="24" Margin="16, 16, 0, 0" Text="{Binding Price}" />
                                     </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-            </StackPanel>
-        </ScrollViewer>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+        <Image Margin="16" Source="Store 2.0 (2).jpg" Height="200" Width="200" VerticalAlignment="Top" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

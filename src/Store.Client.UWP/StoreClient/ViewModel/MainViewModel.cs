@@ -34,6 +34,7 @@ namespace StoreClient.ViewModel
         public RelayCommand<Product> AddProductCommand { get; set; }
         public RelayCommand<String> SearchProductsByNameCommand { get; set; }
         public RelayCommand GetAllProductsCommand { get; set; }
+        public RelayCommand<User> RegisterUserCommand { get; set; }
 
         public MainViewModel(IProductsService productsService)
         {
@@ -41,6 +42,7 @@ namespace StoreClient.ViewModel
             SortProductsCommand = new RelayCommand<int>((sortType) => SortProducts(sortType));
             AddProductCommand = new RelayCommand<Product>((product) => AddProduct(product));
             SearchProductsByNameCommand = new RelayCommand<String>((name) => SearchProductsByName(name));
+            RegisterUserCommand = new RelayCommand<User>((user) => RegisterUser(user));
             GetAllProductsCommand = new RelayCommand(GetAllProducts);
 
 
@@ -59,7 +61,10 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 var products = await productsService.SearchProductsByName(name);
-                Products = new ObservableCollection<Product>(products);
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Products = new ObservableCollection<Product>(products);
+                });
             });
         }
 
@@ -70,10 +75,10 @@ namespace StoreClient.ViewModel
                 await productsService.AddProductToDatabase(product);
                 var products =  await productsService.GetProducts();
                 Products = new ObservableCollection<Product>(products);
-                //DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                //{
-                //    Products = new ObservableRangeCollection<Product>(products);
-                //});
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Products = new ObservableCollection<Product>(products);
+                });
 
             });
         }
@@ -105,7 +110,19 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 var products = await productsService.GetProducts();
-                Products = new ObservableCollection<Product>(products);
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Products = new ObservableCollection<Product>(products);
+                });
+            });
+        }
+
+        public void RegisterUser(User user)
+        {
+            Task.Run(async () =>
+            {
+                RegistrationService registrationService = new RegistrationService();
+                await registrationService.AddUser(user);
             });
         }
     }

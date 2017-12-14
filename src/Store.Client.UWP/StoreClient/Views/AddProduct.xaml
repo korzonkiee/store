@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#5271ff">
         <StackPanel Orientation="Vertical">
+            <Image Margin="16" Source="Store 2.0 (2).jpg" Height="300" Width="300" HorizontalAlignment="Center" Visibility="Visible"/>
             <StackPanel  Margin="10" Orientation="Horizontal">
                 <TextBlock Margin="10" Text="Name:" VerticalAlignment="Center"></TextBlock>
                 <TextBox Name="name"  Text="name" Margin="10" VerticalAlignment="Center" GotFocus="TextBox_GotFocus" MinWidth="20"></TextBox>

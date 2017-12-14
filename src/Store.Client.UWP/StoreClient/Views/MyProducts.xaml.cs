@@ -1,5 +1,8 @@
-﻿using System;
+﻿using StoreClient.DTOs;
+using StoreClient.MyProducts;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +28,19 @@ namespace StoreClient.Views
         public MyProducts()
         {
             this.InitializeComponent();
+            DataContext = this;
+        }
+        public static ObservableCollection<Product> MyNonStaticProperty { get { return MyProductsObject.Products; } }
+       private void DeleteProductFromCard(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            var ProductToRemove = MyProductsObject.Products.FirstOrDefault(p => p.Id == (Guid)button.Tag);
+            MyProductsObject.Products.Remove(ProductToRemove);
+        }
+
+        private void ReturnToMainView(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
     }
 }

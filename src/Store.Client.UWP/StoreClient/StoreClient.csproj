@@ -105,6 +105,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyProducts\MyProductsObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CategoriesService.cs" />
     <Compile Include="Services\AuthService.cs" />
@@ -119,6 +120,12 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\AddProduct.xaml.cs">
       <DependentUpon>AddProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyProducts.xaml.cs">
+      <DependentUpon>MyProducts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -152,6 +159,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MyProducts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -33,5 +33,12 @@ namespace Store.DataAccess.Repository
             context.Add(product);
             context.SaveChanges();
         }
+
+        public void DeleteProductById(Guid id)
+        {
+            var itemToRemove = context.Products.FirstOrDefault(p => p.Id == id);
+            context.Products.Remove(itemToRemove);
+            context.SaveChanges();
+        }
     }
 }

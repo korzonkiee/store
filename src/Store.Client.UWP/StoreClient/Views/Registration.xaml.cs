@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -62,11 +64,13 @@ namespace StoreClient.Views
             var loginService = new LoginService();
             Task.Run(async () =>
             {
-                await loginService.Logout();
                 var result = await loginService.LoginWithFacebook();
                 if (result.IsSuccess)
                 {
-                    this.Frame.Navigate(typeof(MainPage));
+                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        this.Frame.Navigate(typeof(MainPage));
+                    });
                 }
             });
         }

@@ -53,6 +53,12 @@ namespace Store.Api.Controllers
             return Ok(products);
         }
 
+        [HttpGet("delete/{id}")]
+        public void DeleteProductById(Guid id)
+        {
+            productsService.DeleteProductById(id);
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] ProductParams @params)
         {

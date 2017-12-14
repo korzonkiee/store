@@ -20,6 +20,24 @@ namespace StoreClient.Services
             this.localStorage = new LocalStorage();
         }
 
+        public async Task<LoginResult> LoginWithPassword(string username, string password)
+        {
+            var response = await TokenClient.RequestResourceOwnerPasswordAsync(username, password, "openid email offline_access");
+            if (!response.IsError)
+            {
+                localStorage.SetAccessToken(response.AccessToken, response.RefreshToken);
+
+                return new LoginResult()
+                {
+                    IsSuccess = true
+                    // Token = new Tuple<string, string>(response.AccessToken, response.RefreshToken)                        
+                };
+            }
+
+            Logger.Log($"Could not login. StatusCode: {response.HttpStatusCode}, Error: {response.HttpErrorReason}");
+            return new LoginResult() { IsSuccess = false };
+        }
+
         public async Task<LoginResult> LoginWithFacebook()
         {
             var result = await facebookService.LoginAsync();

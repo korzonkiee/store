@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="StoreClient.Views.MyProducts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StoreClient.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+    <Grid Background="#5271ff">
+        <StackPanel Orientation="Vertical">
+            <Image Margin="16" Source="Store 2.0 (2).jpg" Height="300" Width="300" HorizontalAlignment="Center" Visibility="Visible"/>
+            <Button Margin="10" Content="Return to main view" Click="ReturnToMainView" HorizontalAlignment="Center"/>
+            <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" >
+                <StackPanel>
+                    <ListView Name="ProductsListView" ItemsSource="{Binding MyNonStaticProperty}" Background="#a7e66e" Margin="30">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="10">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <Image Margin="16" Source="{Binding ImageUrl}" Height="64" Width="64" />
+                                        <StackPanel Margin="16, 16, 0, 0" Orientation="Vertical">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Description}"/>
+                                            <Button Content="Remove product from card" Tag="{Binding Id}" Click="DeleteProductFromCard"/>
+                                        </StackPanel>
+                                        <TextBlock FontSize="24" Margin="16, 16, 0, 0" Text="{Binding Price}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Page>

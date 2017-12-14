@@ -1,17 +1,11 @@
-﻿using Microsoft.Practices.ServiceLocation;
-using StoreClient.DTOs;
-using StoreClient.Services;
-using StoreClient.ViewModel;
+﻿using StoreClient.DTOs;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,13 +21,12 @@ namespace StoreClient.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Registration : Page
+    public sealed partial class Login : Page
     {
-        public Registration()
+        public Login()
         {
             this.InitializeComponent();
         }
-
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -43,11 +36,11 @@ namespace StoreClient.Views
 
 
 
-        private void RegiserNewUser(object sender, RoutedEventArgs e)
+        private void LoginUser(object sender, RoutedEventArgs e)
         {
             User user = new User();
             user.Email = email.Text;
-            
+
 
             if (IsValidEmail(user.Email))
             {
@@ -55,7 +48,7 @@ namespace StoreClient.Views
                 user.Password = password.Password;
                 if (user.Password.Length >= 8)
                 {
-                    ServiceLocator.Current.GetInstance<MainViewModel>().RegisterUserCommand.Execute(user);
+                  
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else passwordError.Visibility = Visibility.Visible;
@@ -63,29 +56,17 @@ namespace StoreClient.Views
             else emailError.Visibility = Visibility.Visible;
         }
 
-        private void RegisterWithFacebook(object sender, RoutedEventArgs e)
+        private void LoginWithFacebook(object sender, RoutedEventArgs e)
         {
-            var loginService = new LoginService();
-            Task.Run(async () =>
-            {
-                var result = await loginService.LoginWithFacebook();
-                if (result.IsSuccess)
-                {
-                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        this.Frame.Navigate(typeof(MainPage));
-                    });
-                }
-            });
+           
         }
-        
+
         private bool IsValidEmail(string email)
         {
             try
             {
-                //var addr = new System.Net.Mail.MailAddress(email);
-                //return addr.Address == email;
-                return true;
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
             }
             catch
             {
@@ -93,5 +74,5 @@ namespace StoreClient.Views
             }
         }
     }
-    
 }
+

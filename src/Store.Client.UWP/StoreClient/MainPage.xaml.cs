@@ -1,7 +1,10 @@
-﻿using StoreClient.ViewModel;
+﻿using StoreClient.DTOs;
+using StoreClient.MyProducts;
+using StoreClient.ViewModel;
 using StoreClient.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -29,6 +32,7 @@ namespace StoreClient
         {
             this.InitializeComponent();
             var vm = DataContext as MainViewModel;
+            MyProductsObject.Products = new ObservableCollection<Product>();
         }
 
         private void SortList(object sender, SelectionChangedEventArgs e)
@@ -40,7 +44,7 @@ namespace StoreClient
 
         private void AddProduct(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddProduct));
+            this.Frame.Navigate(typeof(AddProduct), DataContext as MainViewModel);
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -63,6 +67,26 @@ namespace StoreClient
         private void Register(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Registration));
+        }
+
+        private void DeleteProduct(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as MainViewModel;
+            Button button = (Button)sender;
+            vm.DeleteProductByIDCommand.Execute(button.Tag);
+        }
+
+        private void AddToCard(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as MainViewModel;
+            Button button = (Button)sender;
+            var ProductToAdd = vm.Products.FirstOrDefault(p => p.Id == (Guid)button.Tag);
+            MyProductsObject.Products.Add(ProductToAdd);
+        }
+
+        private void GoToMyCard(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Views.MyProducts));
         }
     }
 }

@@ -13,23 +13,23 @@
     </Page.Resources>
     <Grid Background="#5271ff">
         <StackPanel Orientation="Vertical">
+            <Image Margin="16" Source="Store 2.0 (2).jpg" Height="200" Width="200" VerticalAlignment="Top" HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Add product" Click="AddProduct" Margin="20" Background="{StaticResource BlueColor}"/>
-                <Button Content="Register" Click="Register" Margin="20" Background="{StaticResource BlueColor}"/>
-            </StackPanel>
-            <ComboBox  Margin ="20" VerticalAlignment="Top" Height="30" SelectionChanged="SortList" AllowDrop="True" Background="{StaticResource BlueColor}">
-                <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
-                <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
-                <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
-                <ComboBoxItem Margin="0,0,10,0" IsSelected="True" Visibility="Collapsed">SortBy</ComboBoxItem>
-            </ComboBox>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <TextBox x:Name="searchByName" Margin ="20" Text="Search by name" GotFocus="TextBox_GotFocus"  MinWidth="20" Background="{StaticResource BlueColor}"/>
-                <Button Content="Search by name" Click="SearchByName" Background="{StaticResource BlueColor}"/>
+                <Button Content="Add product" Click="AddProduct" Margin="20"/>
+                <Button Content="Register" Click="Register" Margin="20"/>
+                <Button Content="Show my card" Click="GoToMyCard" Margin="20"/>
+                <ComboBox  Margin ="20" VerticalAlignment="Top" Height="30" SelectionChanged="SortList" AllowDrop="True">
+                    <ComboBoxItem Margin="0,0,10,0">Name</ComboBoxItem>
+                    <ComboBoxItem Margin="0,0,10,0">Price</ComboBoxItem>
+                    <ComboBoxItem Margin="0,0,10,0">Delivery Time</ComboBoxItem>
+                    <ComboBoxItem Margin="0,0,10,0" IsSelected="True" Visibility="Collapsed">SortBy</ComboBoxItem>
+                </ComboBox>
+                <Button Content="Search by name" Click="SearchByName"/>
+                <TextBox x:Name="searchByName" Margin ="20" Text="Provide name" GotFocus="TextBox_GotFocus"  MinWidth="20"/>
             </StackPanel>
             <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" >
                 <StackPanel>
-                    <ListView Name="ProductsListView" ItemsSource="{Binding Products}" Background="#a7e66e" Margin="30">
+                    <ListView Name="ProductsListView" ItemsSource="{Binding Products}" Margin="30">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="10">
@@ -37,9 +37,11 @@
                                         <Image Margin="16" Source="{Binding ImageUrl}" Height="64" Width="64" />
                                         <StackPanel Margin="16, 16, 0, 0" Orientation="Vertical">
                                             <TextBlock Text="{Binding Name}"  />
-                                            <TextBlock Text="{Binding Description}" />
+                                            <TextBlock Text="{Binding Description}"/>
+                                            <TextBlock FontSize="24" Margin="16, 16, 0, 0" Text="{Binding Price}" />
                                         </StackPanel>
-                                        <TextBlock FontSize="24" Margin="16, 16, 0, 0" Text="{Binding Price}" />
+                                        <Button Margin="10" Content="Delete product" Tag="{Binding Id}" Click="DeleteProduct"/>
+                                        <Button Margin="10" Content="Add to my card" Tag="{Binding Id}" Click="AddToCard"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
@@ -53,6 +55,5 @@
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>
-        <Image Margin="16" Source="Store 2.0 (2).jpg" Height="200" Width="200" VerticalAlignment="Top" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

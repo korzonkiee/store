@@ -58,7 +58,7 @@ namespace StoreClient.Views
                         Name = name.Text,
                         Description = description.Text,
                         Price = (Decimal.Parse(price.Text)),
-                        ImageUrl = imageUrl.Text
+                        ImageUrl = imageUrl.Text,
                     };
 
                     viewModel.AddProductCommand.Execute(product);

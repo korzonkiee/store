@@ -29,6 +29,7 @@
             </Grid>
             <Button Margin="10" Content="Login" Name="register" Click="LoginUser" Foreground="#a7e66e" HorizontalAlignment="Center"/>
             <Button Content="Login with Facebook" Name="register_fb" Click="LoginWithFacebook" Foreground="White" HorizontalAlignment="Center" Margin="10"/>
+            <Button Content="Register new user" Click="GoToRegisterView" Margin="10" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

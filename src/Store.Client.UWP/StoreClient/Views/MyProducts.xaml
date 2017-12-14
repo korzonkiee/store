@@ -9,10 +9,10 @@
     >
 
     <Grid Background="#5271ff">
-        <StackPanel Orientation="Vertical">
-            <Image Margin="16" Source="Store 2.0 (2).jpg" Height="300" Width="300" HorizontalAlignment="Center" Visibility="Visible"/>
-            <Button Margin="10" Content="Return to main view" Click="ReturnToMainView" HorizontalAlignment="Center"/>
-            <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" >
+        <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" >
+            <StackPanel Orientation="Vertical">
+                <Image Margin="16" Source="Store 2.0 (2).jpg" Height="300" Width="300" HorizontalAlignment="Center" Visibility="Visible"/>
+                <Button Margin="10" Content="Return to main view" Click="ReturnToMainView" HorizontalAlignment="Center"/>
                 <StackPanel>
                     <ListView Name="ProductsListView" ItemsSource="{Binding MyNonStaticProperty}" Background="#a7e66e" Margin="30">
                         <ListView.ItemTemplate>
@@ -37,7 +37,7 @@
                         </ListView.ItemContainerStyle>
                     </ListView>
                 </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

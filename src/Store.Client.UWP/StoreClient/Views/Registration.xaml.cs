@@ -56,7 +56,7 @@ namespace StoreClient.Views
                 if (user.Password.Length >= 8)
                 {
                     ServiceLocator.Current.GetInstance<MainViewModel>().RegisterUserCommand.Execute(user);
-                    this.Frame.Navigate(typeof(MainPage));
+                    this.Frame.Navigate(typeof(Login));
                 }
                 else passwordError.Visibility = Visibility.Visible;
             }

@@ -17,6 +17,7 @@ namespace Store.Api.Services
         IEnumerable<ProductDTO> GetAllProducts();
         ProductDTO GetProductById(Guid id);
         void AddProduct(ProductParams @params);
+        void DeleteProductById(Guid id);
 
         IEnumerable<ProductDTO> GetProductsByName(string keyValue);
     }
@@ -66,6 +67,11 @@ namespace Store.Api.Services
                 @params.CategoryId);
                 
             bus.SendCommand(addProductCommand);
+        }
+
+        public void DeleteProductById(Guid id)
+        {
+            productsRepository.DeleteProductById(id);
         }
     }
 }

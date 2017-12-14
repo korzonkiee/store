@@ -83,8 +83,9 @@ namespace StoreClient.Views
         {
             try
             {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
+                //var addr = new System.Net.Mail.MailAddress(email);
+                //return addr.Address == email;
+                return true;
             }
             catch
             {

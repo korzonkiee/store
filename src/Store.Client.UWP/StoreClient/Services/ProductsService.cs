@@ -19,36 +19,37 @@ namespace StoreClient.Services
     }
 
 
-    public class ProductsService : IProductsService
+    public class ProductsService : ApiService, IProductsService
     {
         public async Task<List<Product>> GetProducts()
         {
-            return await RestService
-                .For<IProductsServiceRefit>("http://localhost:5000")
+            return await ProductsServiceRefit
                 .GetProducts();
         }
 
         public async Task<List<Product>> GetProductById(String Id)
         {
-            return await RestService
-                .For<IProductsServiceRefit>("http://localhost:5000")
+            return await ProductsServiceRefit
                 .GetProductById();
         }
 
 
         public async Task AddProductToDatabase(Product product)
         {
-            await RestService.For<IProductsServiceRefit>("http://localhost:5000").AddProduct(product);
+            await ProductsServiceRefit
+                .AddProduct(product);
         }
 
         public async Task<List<Product>> SearchProductsByName(String name)
         {
-            return await RestService.For<IProductsServiceRefit>("http://localhost:5000").SearchProductsByName(name);
+            return await ProductsServiceRefit
+                .SearchProductsByName(name);
         }
 
         public async Task DeleteProductById(Guid id)
         {
-            await RestService.For<IProductsServiceRefit>("http://localhost:5000").DeleteProductById(id);
+            await ProductsServiceRefit
+                .DeleteProductById(id);
         }
     }
 

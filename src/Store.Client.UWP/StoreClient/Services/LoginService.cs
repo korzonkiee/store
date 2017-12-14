@@ -12,10 +12,12 @@ namespace StoreClient.Services
     public sealed class LoginService : AuthService
     {
         private readonly IFacebookService facebookService;
+        private readonly LocalStorage localStorage;
 
         public LoginService()
         {
-            facebookService = new FacebookService();
+            this.facebookService = new FacebookService();
+            this.localStorage = new LocalStorage();
         }
 
         public async Task<LoginResult> LoginWithFacebook()
@@ -26,10 +28,12 @@ namespace StoreClient.Services
                 var response = await TokenClient.RequestAssertionAsync(FacebookConfig.FacebookAssertion, result.AccessToken, "email");
                 if (!response.IsError)
                 {
+                    localStorage.SetAccessToken(response.AccessToken, response.RefreshToken);
+
                     return new LoginResult()
                     {
-                        IsSuccess = true,
-                        Token = new Tuple<string, string>(response.AccessToken, response.RefreshToken)                        
+                        IsSuccess = true
+                        // Token = new Tuple<string, string>(response.AccessToken, response.RefreshToken)                        
                     };
                 }
                 
@@ -51,6 +55,6 @@ namespace StoreClient.Services
     public class LoginResult
     {
         public bool IsSuccess { get; set; }
-        public Tuple<string, string> Token { get; set; }
+        // public Tuple<string, string> Token { get; set; }
     }
 }

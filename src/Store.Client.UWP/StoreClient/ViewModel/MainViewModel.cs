@@ -41,7 +41,7 @@ namespace StoreClient.ViewModel
         {
             this.productsService = productsService;
             SortProductsCommand = new RelayCommand<int>((sortType) => SortProducts(sortType));
-            AddProductCommand = new RelayCommand<Product>((product) => AddProduct(product));
+            AddProductCommand = new RelayCommand<Product>(async (product) => await AddProduct(product));
             SearchProductsByNameCommand = new RelayCommand<String>((name) => SearchProductsByName(name));
             RegisterUserCommand = new RelayCommand<User>((user) => RegisterUser(user));
             GetAllProductsCommand = new RelayCommand(GetAllProducts);
@@ -83,18 +83,22 @@ namespace StoreClient.ViewModel
             });
         }
 
-        public void AddProduct(Product product)
+        public async Task AddProduct(Product product)
         {
-            Task.Run(async () =>
+            try
             {
                 await productsService.AddProductToDatabase(product);
-                var products = await productsService.GetProducts();
-                Products = new ObservableCollection<Product>(products);
-                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                    Products = new ObservableCollection<Product>(products);
-                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
+            var products = await productsService.GetProducts();
+            Products = new ObservableCollection<Product>(products);
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                Products = new ObservableCollection<Product>(products);
             });
         }
 

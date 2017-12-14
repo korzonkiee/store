@@ -44,7 +44,7 @@ namespace StoreClient
 
         private void AddProduct(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddProduct));
+            this.Frame.Navigate(typeof(AddProduct), DataContext as MainViewModel);
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)

@@ -48,6 +48,7 @@ namespace StoreClient.Services
 
         public async Task Logout()
         {
+            localStorage.SetAccessToken(string.Empty, string.Empty);
             await facebookService.LogoutAsync();
         }
     }

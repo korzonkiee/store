@@ -15,7 +15,7 @@ namespace StoreClient.Services
         public IProductsServiceRefit ProductsServiceRefit { get; private set; } =
             RestService.For<IProductsServiceRefit>(new HttpClient(new AuthenticatedHttpClientHandler())
             {
-                BaseAddress = new Uri("http://localhost5000")
+                BaseAddress = new Uri("http://localhost:5000")
             });
     }
 }

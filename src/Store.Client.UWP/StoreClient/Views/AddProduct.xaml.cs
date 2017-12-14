@@ -25,10 +25,13 @@ namespace StoreClient.Views
     /// </summary>
     public sealed partial class AddProduct : Page
     {
+        private MainViewModel viewModel;
+
         public AddProduct()
         {
             this.InitializeComponent();
         }
+
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -36,34 +39,41 @@ namespace StoreClient.Views
             tb.GotFocus -= TextBox_GotFocus;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            viewModel = e.Parameter as MainViewModel;
+            base.OnNavigatedTo(e);
+        }
+
 
         private void AddItem(object sender, RoutedEventArgs e)
         {
-                if (name.Text.Length > 1 && description.Text.Length > 1 && price.Text.Length >= 1 && imageUrl.Text.Length > 1)
+            if (name.Text.Length > 1 && description.Text.Length > 1 && price.Text.Length >= 1 && imageUrl.Text.Length > 1)
+            {
+                try
                 {
-                    try
+                    Product product = new Product
                     {
-                        Product product = new Product
-                        {
-                            Id = Guid.Empty,
-                            Name = name.Text,
-                            Description = description.Text,
-                            Price = (Decimal.Parse(price.Text)),
-                            ImageUrl = imageUrl.Text
-                        };
-                        ServiceLocator.Current.GetInstance<MainViewModel>().AddProductCommand.Execute(product);
+                        Id = Guid.Empty,
+                        Name = name.Text,
+                        Description = description.Text,
+                        Price = (Decimal.Parse(price.Text)),
+                        ImageUrl = imageUrl.Text
+                    };
 
-                    this.Frame.Navigate(typeof(MainPage));
+                    viewModel.AddProductCommand.Execute(product);
+
+                    this.Frame.GoBack();
                 }
-                    catch (Exception)
-                    {
-                        wrongProduct.Visibility = Visibility.Visible;
-                    }
-                }
-                else
+                catch (Exception)
+                {
                     wrongProduct.Visibility = Visibility.Visible;
-
+                }
             }
-        
+            else
+                wrongProduct.Visibility = Visibility.Visible;
+
+        }
+
     }
 }

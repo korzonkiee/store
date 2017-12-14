@@ -28,13 +28,14 @@ namespace StoreClient.ViewModel
                 RaisePropertyChanged(nameof(Products));
             }
         }
-       // private ObservableCollection<Category> categories = new ObservableCollection<Categori>
+        // private ObservableCollection<Category> categories = new ObservableCollection<Categori>
 
         public RelayCommand<int> SortProductsCommand { get; set; }
         public RelayCommand<Product> AddProductCommand { get; set; }
         public RelayCommand<String> SearchProductsByNameCommand { get; set; }
         public RelayCommand GetAllProductsCommand { get; set; }
         public RelayCommand<User> RegisterUserCommand { get; set; }
+        public RelayCommand<Guid> DeleteProductByIDCommand { get; set; }
 
         public MainViewModel(IProductsService productsService)
         {
@@ -44,10 +45,24 @@ namespace StoreClient.ViewModel
             SearchProductsByNameCommand = new RelayCommand<String>((name) => SearchProductsByName(name));
             RegisterUserCommand = new RelayCommand<User>((user) => RegisterUser(user));
             GetAllProductsCommand = new RelayCommand(GetAllProducts);
+            DeleteProductByIDCommand = new RelayCommand<Guid>((id) => DeleteProductByID(id));
 
 
             Task.Run(async () =>
             {
+                var products = await productsService.GetProducts();
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Products = new ObservableCollection<Product>(products);
+                });
+            });
+        }
+
+        private void DeleteProductByID(Guid id)
+        {
+            Task.Run(async () =>
+            {
+                await productsService.DeleteProductById(id);
                 var products = await productsService.GetProducts();
                 await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
@@ -73,7 +88,7 @@ namespace StoreClient.ViewModel
             Task.Run(async () =>
             {
                 await productsService.AddProductToDatabase(product);
-                var products =  await productsService.GetProducts();
+                var products = await productsService.GetProducts();
                 Products = new ObservableCollection<Product>(products);
                 await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
@@ -88,8 +103,8 @@ namespace StoreClient.ViewModel
             switch (sortType)
             {
                 case 0:
-                    List<Product> sortedlistName = Products.OrderBy(o=>o.Name).ToList();
-                    for(int i = 0; i < sortedlistName.Count(); i++)
+                    List<Product> sortedlistName = Products.OrderBy(o => o.Name).ToList();
+                    for (int i = 0; i < sortedlistName.Count(); i++)
                         Products.Move(Products.IndexOf(sortedlistName[i]), i);
                     break;
                 case 1:

@@ -13,6 +13,7 @@ namespace StoreClient.Services
     {
         Task<List<Product>> GetProducts();
         Task AddProductToDatabase(Product product);
+        Task DeleteProductById(Guid id);
 
         Task<List<Product>> SearchProductsByName(String name);
     }
@@ -43,6 +44,11 @@ namespace StoreClient.Services
         public async Task<List<Product>> SearchProductsByName(String name)
         {
             return await RestService.For<IProductsServiceRefit>("http://localhost:5000").SearchProductsByName(name);
+        }
+
+        public async Task DeleteProductById(Guid id)
+        {
+            await RestService.For<IProductsServiceRefit>("http://localhost:5000").DeleteProductById(id);
         }
     }
 

@@ -21,6 +21,9 @@ namespace StoreClient.Services.Refit
 
         [Get("/api/products/search/{name}")]
         Task<List<Product>> SearchProductsByName(String name);
+
+        [Get("/api/products/delete/{id}")]
+        Task DeleteProductById(Guid id);
     }
 
 

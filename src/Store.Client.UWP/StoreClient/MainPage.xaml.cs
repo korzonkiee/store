@@ -64,5 +64,12 @@ namespace StoreClient
         {
             this.Frame.Navigate(typeof(Registration));
         }
+
+        private void DeleteProduct(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as MainViewModel;
+            Button button = (Button)sender;
+            vm.DeleteProductByIDCommand.Execute(button.Tag);
+        }
     }
 }

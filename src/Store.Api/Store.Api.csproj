@@ -7,13 +7,13 @@
     <ProjectReference Include="../Store.DataAccess/Store.DataAccess.csproj" />
     <ProjectReference Include="../Store.Domain/Store.Domain.csproj" />
     <ProjectReference Include="../Store.Migrations/Store.Migrations.csproj" />
+    <ProjectReference Include="../Store.Auth/Store.Auth.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.1.0" />
     <PackageReference Include="MediatR" Version="3.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
   </ItemGroup>

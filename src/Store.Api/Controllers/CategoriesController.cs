@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.ControllerParams;
 using Store.Api.Services;
@@ -6,6 +7,7 @@ using Store.Domain.Events;
 
 namespace Store.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     public class CategoriesController : BaseApiController
     {
@@ -16,6 +18,7 @@ namespace Store.Api.Controllers
             this.categoriesService = categoriesService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetProducts()
         {

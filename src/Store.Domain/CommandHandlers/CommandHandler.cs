@@ -18,8 +18,13 @@ namespace Store.Domain.CommandHandlers
         {
             foreach (var error in command.ValidationResult.Errors)
             {
-                bus.RaiseEvent(new DomainEvent(command.MessageType, error.ErrorMessage));
+                RaiseValidationError(command.MessageType, error.ErrorMessage);
             }
+        }
+
+        protected void RaiseValidationError(string errorType, string error)
+        {
+            bus.RaiseEvent(new DomainEvent(errorType, error));
         }
     }
 }

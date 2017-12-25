@@ -4,5 +4,11 @@
   "description": "Web application that allows to buy different products.",
   "main": "index.js",
   "author": "Rootie",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^16.0.31",
+    "@types/react-dom": "^16.0.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
 }

@@ -3,15 +3,20 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "commonjs",
-    "target": "es5",
+    "module": "es2015",
+    "target": "es6",
     "jsx": "react",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
     "lib": [
       "es5",
       "es6",
       "dom"
     ]
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "./src/**/*"
   ]

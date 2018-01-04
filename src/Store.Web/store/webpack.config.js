@@ -9,11 +9,22 @@ module.exports = {
   devtool: "source-map",
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"] 
+    extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".jsx"] 
   },
   module: {
     loaders: [
-      { test: /\.tsx$/, loader: 'awesome-typescript-loader' },
-    ],
+      {
+        test: /\.ts|\.tsx$/, loader: 'awesome-typescript-loader'
+      },
+      {
+        test: /\.(ts|tsx)?$/,
+        enforce: "pre",
+        loader: "tslint-loader",
+        options: {
+            failOnHint: true,
+            configFile: "./tslint.json"
+        }
+      }
+    ]
   }
 }

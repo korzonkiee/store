@@ -1,15 +1,16 @@
 import * as React from 'react';
+import { Card, CardTitle, CardText} from 'material-ui';
 
-export interface Props {
+export interface ProductProps {
     name: string;
     desc: string;
     price: number;
     updateSelectedProduct: (productName: string) => void;
 }
 
-export class ProductComponent extends React.Component<Props, {}> {
+export class ProductComponent extends React.Component<ProductProps, {}> {
 
-    constructor(props: Props, context?: any) {
+    constructor(props: ProductProps, context?: any) {
         super(props, context);
         this.selectProductAction = this.selectProductAction.bind(this);
     }
@@ -20,11 +21,14 @@ export class ProductComponent extends React.Component<Props, {}> {
 
     public render() {
         return (
-            <div onClick={this.selectProductAction}>
-                <p>Name: {this.props.name}</p>
-                <p>Description: {this.props.desc}</p>
-                <p>Price: {this.props.price}</p>
-            </div>
+            <Card expandable={true}>
+                <CardTitle title={this.props.name} />
+                <CardText>
+                    <div onClick={this.selectProductAction}>
+                        <p>{this.props.desc}</p>
+                    </div>
+                </CardText>
+            </Card>
         );
     }
 }

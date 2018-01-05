@@ -1,15 +1,36 @@
-import { ApplicationState } from '../Store/Store';
+import { ProductProps } from '../Components/Product';
+import { GetProductsAction } from '../ActionCreators/ProductActionCreators';
+import { Dispatch } from 'redux';
+import { Product } from '../Models/Product';
+import { ApplicationState, ProductsState } from '../Store/Store';
 import { connect } from 'react-redux';
-import { ProductsListCompontent, Props } from '../Components/ProductsList';
+import { ProductsListCompontent, ProductsProps } from '../Components/ProductsList';
 
-function mapStateToProps(state: ApplicationState): Props {
+export interface ProductsStateProps {
+    products: Product[];
+}
+
+export interface ProductsDispatchProps {
+    getProducts: () => void;
+}
+
+function mapStateToProps(state: ApplicationState): ProductsStateProps {
     return {
         products: state.products
     };
 }
 
+function mapDispatchToProps(dispatch: Dispatch<any>): ProductsDispatchProps {
+    return {
+        getProducts: () => {
+            dispatch(GetProductsAction());
+        }
+    };
+}
+
 const ConnectedProduct = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ProductsListCompontent);
 
 export default ConnectedProduct;

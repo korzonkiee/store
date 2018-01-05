@@ -2,9 +2,22 @@
 # yarn lockfile v1
 
 
+"@types/material-ui@^0.20.1":
+  version "0.20.1"
+  resolved "https://registry.yarnpkg.com/@types/material-ui/-/material-ui-0.20.1.tgz#c4ea0c5ad07d89732959383a3706d477018093f0"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-addons-linked-state-mixin" "*"
+
 "@types/node@*":
   version "8.5.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.2.tgz#83b8103fa9a2c2e83d78f701a9aa7c9539739aa5"
+
+"@types/react-addons-linked-state-mixin@*":
+  version "0.14.18"
+  resolved "https://registry.yarnpkg.com/@types/react-addons-linked-state-mixin/-/react-addons-linked-state-mixin-0.14.18.tgz#6977ae59e19aa0ce3a5d7a9e057961aaf1afe959"
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-dom@^16.0.3":
   version "16.0.3"

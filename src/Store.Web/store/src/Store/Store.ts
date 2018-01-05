@@ -13,7 +13,7 @@ export interface ApplicationState extends ProductsState {
 }
 
 export const defaultState: ApplicationState = {
-    products: [{name: 'P1', desc: 'D1', price: 1}],
+    products: [],
     selectedProduct: null
 };
 

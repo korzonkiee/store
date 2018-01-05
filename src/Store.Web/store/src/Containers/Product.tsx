@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ApplicationState } from '../Store/Store';
-import { ProductComponent, Props as ProductProps } from '../Components/Product';
+import { ProductComponent, ProductProps as ProductProps } from '../Components/Product';
 import * as ProductActions from '../ActionCreators/ProductActionCreators';
 import { SelectProductAction, GetProductsAction } from '../ActionCreators/ProductActionCreators';
 

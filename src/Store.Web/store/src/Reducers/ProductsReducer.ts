@@ -5,8 +5,8 @@ import { handleActions, Action, BaseAction} from 'redux-actions';
 import { Product } from '../Models/Product';
 
 export const initialState: ProductsState = {
-    products: [{name: 'Product1', desc: 'Desc1', price: 1}],
-    selectedProduct: 'Product1'
+    products: [],
+    selectedProduct: null
 };
 
 export const productsReducers = {

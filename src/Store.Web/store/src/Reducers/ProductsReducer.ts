@@ -1,6 +1,9 @@
 import { ApplicationState, ProductsState, defaultState } from '../Store/Store';
 import { Reducer } from 'redux';
-import { GetProductsAction, SelectProductAction, SelectProductPayload, ProductsPayload } from '../ActionCreators/ProductActionCreators';
+import {
+    GetProductAction,
+    GetProductsAction
+} from '../ActionCreators/ProductActionCreators';
 import { handleActions, Action, BaseAction} from 'redux-actions';
 import { Product } from '../Models/Product';
 
@@ -10,19 +13,17 @@ export const initialState: ProductsState = {
 };
 
 export const productsReducers = {
-    [SelectProductAction.toString()]: (state: ProductsState, action: Action<SelectProductPayload>): ProductsState => {
-        console.log(SelectProductAction.toString() + ' received');
-        return {
-            selectedProduct: action.payload.selectedProduct,
-            ...state
-        };
-    },
+    // [SelectProductAction.toString()]: (state: ProductsState, action: Action<SelectProductPayload>): ProductsState => {
+    //     console.log(SelectProductAction.toString() + ' received');
+    //     return {
+    //         selectedProduct: action.payload.selectedProduct,
+    //         ...state
+    //     };
+    // },
     [GetProductsAction.toString() + '_PENDING']: (state: ProductsState, action: BaseAction): ProductsState => {
-        console.log(GetProductsAction.toString() + '_PENDING received');
         return state;
     },
     [GetProductsAction.toString() + '_REJECTED']: (state: ProductsState, action: Action<any>): ProductsState => {
-        console.log(GetProductsAction.toString() + '_REJECTED received');
         return state;
     },
     [GetProductsAction.toString() + '_FULFILLED']: (state: ProductsState, action: Action<Product[]>): ProductsState => {
@@ -30,6 +31,13 @@ export const productsReducers = {
         return {
             ...state,
             products: action.payload
+        };
+    },
+    [GetProductAction.toString() + '_FULFILLED']: (state: ProductsState, action: Action<Product>): ProductsState => {
+        console.log(GetProductsAction.toString() + '_FULFILLED received');
+        return {
+            ...state,
+            selectedProduct: action.payload
         };
     }
 };

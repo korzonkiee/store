@@ -6,7 +6,7 @@ import promiseMiddleware from 'redux-promise-middleware';
 
 export interface ProductsState {
     products: Product[];
-    selectedProduct: string;
+    selectedProduct: Product;
 }
 
 export interface ApplicationState extends ProductsState {

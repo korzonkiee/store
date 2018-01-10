@@ -4,7 +4,7 @@ import {
     GetProductAction,
     GetProductsAction
 } from '../ActionCreators/ProductActionCreators';
-import { handleActions, Action, BaseAction} from 'redux-actions';
+import { handleActions, Action, BaseAction } from 'redux-actions';
 import { Product } from '../Models/Product';
 
 export const initialState: ProductsState = {
@@ -12,7 +12,7 @@ export const initialState: ProductsState = {
     selectedProduct: null
 };
 
-export const productsReducers = {
+export const productsReducers: ReduxActions.ReducerMap<ApplicationState, any> = {
     // [SelectProductAction.toString()]: (state: ProductsState, action: Action<SelectProductPayload>): ProductsState => {
     //     console.log(SelectProductAction.toString() + ' received');
     //     return {
@@ -20,24 +20,23 @@ export const productsReducers = {
     //         ...state
     //     };
     // },
-    [GetProductsAction.toString() + '_PENDING']: (state: ProductsState, action: BaseAction): ProductsState => {
-        return state;
+    // [GetProductsAction.toString() + '_PENDING']: (state: ApplicationState, action: BaseAction): ApplicationState => {
+    //     return state;
+    // }
+    // [GetProductsAction.toString() + '_REJECTED']: (state: ProductsState, action: Action<any>): ProductsState => {
+    //     return state;
+    // },
+    [GetProductAction.toString() + '_FULFILLED']: (state: ApplicationState, action: Action<Product>): ApplicationState => {
+        return {
+            ...state,
+            selectedProduct: action.payload
+        };
     },
-    [GetProductsAction.toString() + '_REJECTED']: (state: ProductsState, action: Action<any>): ProductsState => {
-        return state;
-    },
-    [GetProductsAction.toString() + '_FULFILLED']: (state: ProductsState, action: Action<Product[]>): ProductsState => {
+    [GetProductsAction.toString() + '_FULFILLED']: (state: ApplicationState, action: Action<Product[]>): ApplicationState => {
         console.log(GetProductsAction.toString() + '_FULFILLED received');
         return {
             ...state,
             products: action.payload
-        };
-    },
-    [GetProductAction.toString() + '_FULFILLED']: (state: ProductsState, action: Action<Product>): ProductsState => {
-        console.log(GetProductsAction.toString() + '_FULFILLED received');
-        return {
-            ...state,
-            selectedProduct: action.payload
         };
     }
 };

@@ -59,7 +59,7 @@ namespace Store.Auth
 
             services.AddAuthentication(options =>
             {
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;                
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             });
 
             services.AddMediatR(typeof(Startup));
@@ -78,6 +78,14 @@ namespace Store.Auth
             // CommandHandlers
             services.AddScoped<IAsyncNotificationHandler<RegisterUserCommand>, RegisterUserCommandHandler>();
             services.AddScoped<IBus, InMemoryBus>();
+
+            // CORS
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -86,6 +94,8 @@ namespace Store.Auth
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseIdentityServer();
 
